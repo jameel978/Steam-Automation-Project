@@ -24,6 +24,9 @@ class BrowserWrapper:
         elif browser == "edge":
             options = webdriver.EdgeOptions()
             browser_webdriver = webdriver.Edge
+        elif browser == "firefox":
+            options = webdriver.FirefoxOptions()
+            browser_webdriver = webdriver.Firefox
         # Adding argument to disable the AutomationControlled flag
         #options.add_argument("--disable-blink-features=AutomationControlled")
         # Exclude the collection of enable-automation switches

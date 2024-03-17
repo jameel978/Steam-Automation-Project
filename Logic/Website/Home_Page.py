@@ -19,10 +19,8 @@ class Home_page(Driverinstance):
         super().__init__(driver)
         self.go_to_url(self.PAGE_URL)
 
-    def write_in_search_input(self, txt,press_return = True,delay = 0.1):
-        self.Find_and_send_input_to_element(self.SEARCH_INPUT, txt,delay)
-        #Wait for results to Update
-        time.sleep(1)
+    def write_in_search_input(self, txt,press_return = True):
+        self.Find_and_send_input_to_element(self.SEARCH_INPUT, txt)
         if press_return:
             self.Find_and_send_input_to_element(self.SEARCH_INPUT, Keys.RETURN)
 
