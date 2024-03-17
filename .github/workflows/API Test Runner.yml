@@ -1,4 +1,4 @@
-name: Test_Runner Execution
+name: API Test Runner Execution
 
 on: workflow_dispatch
 

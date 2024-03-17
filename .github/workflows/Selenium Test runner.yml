@@ -1,4 +1,4 @@
-name: Test_Runner Execution
+name: Selenium Test Runner sExecution
 
 on: workflow_dispatch
 
