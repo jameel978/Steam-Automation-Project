@@ -1,0 +1,7 @@
+{
+  "url": "https://store.steampowered.com/appreviews/",
+  "review_num": "num_per_page",
+  "language" : "language",
+  "min_play_time" : "playtime_filter_min",
+  "max_play_time" : "playtime_filter_max"
+}

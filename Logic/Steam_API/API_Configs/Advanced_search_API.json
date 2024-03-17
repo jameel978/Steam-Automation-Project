@@ -1,0 +1,10 @@
+{
+  "url": "https://store.steampowered.com/search/results?json=1",
+  "max_price" : "maxprice",
+  "hide_free_games" : "hidef2p=1",
+  "language" : "supportedlang",
+  "sort_by_high_price" : "sort_by=Price_DESC",
+  "sort_by_low_price" : "sort_by=Price_ASC",
+  "games_only" : "category1=998"
+
+}
