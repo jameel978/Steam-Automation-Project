@@ -1,0 +1,24 @@
+name: Test_Runner Execution
+
+on: workflow_dispatch
+
+jobs:
+  run_python_script:
+    name: Run Python script
+    runs-on: ubuntu-latest  # Use the latest version of Ubuntu
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # Checkout the repository's code
+
+      - name: Set up Python
+        uses: actions/setup-python@v5  # Set up Python environment
+        with:
+              python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # Install dependencies if needed
+
+      - name: Running API Tests
+        run: python API_Test_runner.py

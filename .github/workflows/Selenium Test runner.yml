@@ -1,0 +1,41 @@
+name: Test_Runner Execution
+
+on: workflow_dispatch
+
+jobs:
+  run_python_script:
+    name: Run Python script
+    runs-on: ubuntu-latest  # Use the latest version of Ubuntu
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # Checkout the repository's code
+
+      - name: Set up Python
+        uses: actions/setup-python@v5  # Set up Python environment
+        with:
+              python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # Install dependencies if needed
+          
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --version
+
+      - uses: browser-actions/setup-edge@latest
+      - run: edge --version
+
+      - uses: browser-actions/setup-firefox@latest
+      - run: firefox --version
+
+      - name: Start Selenium Server HUB
+        run: nohup java -jar selenium-server.jar hub & sleep 10
+        shell: bash
+
+      - name: Start Selenium Server nodes
+        run: nohup java -jar selenium-server.jar node --port 5555 --selenium-manager true & sleep 10
+        shell: bash
+
+      - name: Running Selenium Tests
+        run: python Selenium_test_runner.py
