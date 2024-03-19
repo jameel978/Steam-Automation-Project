@@ -1,7 +1,7 @@
 import unittest
-from Infra.Api_wrapper import APIWrapper
 from Logic.Steam_API.APP_Reviews_API import *
-from Logic.Utils import *
+from Infra.Api_wrapper import *
+from Utils.Utils import *
 
 
 class app_review_api_tests(unittest.TestCase):

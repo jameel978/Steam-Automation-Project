@@ -6,9 +6,7 @@ import importlib.util
 import inspect
 import unittest
 from Infra.Browser_wrapper import *
-
-# Import your test modules
-from Tests.Test_Steam_API.Test_app_review_api import *
+from Utils.Utils import *
 
 
 def run_test(_current_test):

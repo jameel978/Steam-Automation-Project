@@ -1,5 +1,4 @@
-from Infra.Api_wrapper import APIWrapper
-from Logic.Utils import *
+from Utils.Utils import *
 import os
 
 class APP_Details_API:

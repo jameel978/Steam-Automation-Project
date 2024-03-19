@@ -5,9 +5,7 @@ import os
 import importlib.util
 import inspect
 import unittest
-
-# Import your test modules
-from Tests.Test_Steam_API.Test_app_review_api import *
+from Utils.Utils import *
 
 
 def run_test(current_test):
@@ -63,12 +61,12 @@ def get_unittest_classes(_folder_path):
 
 
 if __name__ == '__main__':
-    folder_path = "Tests/Test_Steam_API"
+    folder_path = "Tests/Steam_API"
     test_classes = get_unittest_classes(folder_path)
     all_test_cases = prepair_all_tests(test_classes)
     # read from config
     cur_dir = os.path.dirname(os.path.abspath(__file__))
-    test_config = read_json(os.path.join(cur_dir, "Tests/Test_Steam_API/Config/Test_runner.json"))
+    test_config = read_json(os.path.join(cur_dir, "Tests/Steam_API/Config/Test_runner.json"))
     serial_run = test_config["run_serial"]
     start_time = time.time()
     results = None

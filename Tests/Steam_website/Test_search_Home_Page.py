@@ -1,6 +1,7 @@
 import unittest
 from Logic.Website.Home_Page import *
 from Infra.Browser_wrapper import *
+from Utils.Utils import *
 
 class building_pc_tests(unittest.TestCase):
     def __init__(self, methodName='runTest', cap=None):

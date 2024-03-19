@@ -1,10 +1,10 @@
-name: Selenium Test Runner Execution
+name: Test runner
 
 on: workflow_dispatch
 
 jobs:
   run_python_script:
-    name: Selenium Test Runner
+    name: Test runner
     runs-on: ubuntu-latest  # Use the latest version of Ubuntu
 
     steps:
@@ -18,7 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt  # Install dependencies if needed
+          pip install -r Utils/requirements.txt  # Install dependencies if needed
           
       - uses: browser-actions/setup-chrome@latest
 
@@ -26,13 +26,14 @@ jobs:
 
       - uses: browser-actions/setup-firefox@latest
 
-      - name: Start Selenium Server HUB
-        run: nohup java -jar selenium-server.jar hub & sleep 10
-        shell: bash
+      - name: prepare Tokens
+        env:
+          COOKIES: ${{ secrets.COOKIES }}
 
-      - name: Start Selenium Server nodes
-        run: nohup java -jar selenium-server.jar node --port 5555 --selenium-manager true & sleep 10
-        shell: bash
+        run: python Utils/Create_Tokens.py
 
       - name: Running Selenium Tests
         run: python Selenium_test_runner.py
+
+      - name: Running API Tests
+        run: python API_Test_runner.py

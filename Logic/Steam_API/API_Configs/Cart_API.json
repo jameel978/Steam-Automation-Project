@@ -1,0 +1,6 @@
+{
+  "url": "https://api.steampowered.com/IAccountCartService/AddItemToCart/v1/?",
+  "country_code" : "cc",
+  "language" : "l"
+
+}

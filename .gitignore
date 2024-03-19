@@ -1,1 +1,12 @@
 /.idea
+Utils/cookies_chrome.json
+Utils/cookies_edge.json
+Utils/cookies_firefox.json
+Logic/__pycache__/Utils.cpython-311.pyc
+Utils/__pycache__/Utils.cpython-312.pyc
+Tests/Steam_website/__pycache__/Test_search_Home_Page.cpython-312.pyc
+Tests/Steam_API/__pycache__/Test_Store_Search_api.cpython-312.pyc
+*/*/.pyc
+*/*/__pycache__/
+Utils/steam_key.json
+Utils/tokens.json

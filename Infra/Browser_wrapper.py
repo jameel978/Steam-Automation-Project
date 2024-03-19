@@ -1,5 +1,5 @@
 from selenium import webdriver
-from Logic.Utils import *
+
 
 class BrowserWrapper:
     def __init__(self,config_ = None):
@@ -58,7 +58,7 @@ class BrowserWrapper:
         # Turn-off userAutomationExtension
         #options.add_experimental_option("useAutomationExtension", False)
         browser_webdriver_args = {'options': options}
-        return browser_webdriver, browser_webdriver_args
+        return (browser_webdriver, browser_webdriver_args, "chrome")
 
     def get_caps(self):
         return self.caps_list

@@ -2,7 +2,6 @@ import unittest
 from Infra.Api_wrapper import APIWrapper
 from Logic.Steam_API.Store_Search_API import *
 from Logic.Steam_API.APP_Details_API import *
-from Logic.Utils import *
 
 
 class store_search_tests(unittest.TestCase):

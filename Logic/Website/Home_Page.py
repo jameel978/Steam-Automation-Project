@@ -1,12 +1,8 @@
-from Infra.Driver_instance import Driverinstance
-from selenium.webdriver.common.by import By
+from Logic.Website.Website_page import Website_page
 from selenium.webdriver.common.keys import Keys
-import time
-from Logic.Utils import *
 
 
-
-class Home_page(Driverinstance):
+class Home_page(Website_page):
     PAGE_URL = "https://store.steampowered.com/"
     SEARCH_INPUT = "//input[@id='store_nav_search_term']"
 
