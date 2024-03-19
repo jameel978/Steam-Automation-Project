@@ -5,7 +5,7 @@ on: workflow_dispatch
 jobs:
   run_python_script:
     name: Test runner
-    runs-on: ubuntu-latest  # Use the latest version of Ubuntu
+    runs-on: windows-latest  # Use the latest version of Windows
 
     steps:
       - name: Checkout code

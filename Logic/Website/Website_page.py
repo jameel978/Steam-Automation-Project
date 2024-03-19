@@ -10,12 +10,10 @@ class Website_page(Driverinstance):
     def __init__(self, cap, login=False):
         super().__init__(cap)
         self.token = None
-        self.steam_key = None
         if login:
             browser = cap[2]
             cur_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
             cookies = read_json(os.path.join(cur_dir, "Utils", "tokens.json"))[browser]
-            self.steam_key = read_json(os.path.join(cur_dir, "Utils", "steam_key.json"))['Key']
             self.driver.get("https://store.steampowered.com/")
             for cookie in cookies:
                 self.driver.add_cookie(cookie)
