@@ -134,3 +134,5 @@ def get_access_token(driver):
     # Switch back to the original tab
     driver.switch_to.window(driver.window_handles[0])
     return body_text.json()
+
+
