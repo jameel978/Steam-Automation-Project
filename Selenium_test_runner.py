@@ -1,4 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor
+from html_testRunner import HTMLTestRunner
 from io import StringIO
 import time
 import os
@@ -10,16 +11,27 @@ from Utils.Utils import *
 
 
 def run_test(_current_test):
+    test_name = _current_test[1]
+    test_browser = _current_test[2][2]
     suite = unittest.TestSuite()
     suite.addTest(init_test(_current_test))
     # Run the test suite
-    _result = unittest.TextTestRunner(stream=StringIO(), verbosity=2).run(suite)
+    cur_dir = os.path.dirname(os.path.abspath(__file__))
+    report_filename = os.path.join(cur_dir,"Reports", f'{test_name}_{test_browser}_report.html')
+    # Open the file to write the HTML report
+    with open(report_filename, 'w') as report_file:
+        # Use HTMLTestRunner to run the test suite and generate the HTML report
+        runner = HTMLTestRunner(
+            stream=report_file,
+            verbosity=2
+        )
+        _result = runner.run(suite)
     if _result.wasSuccessful():
-            print(f"'{_current_test[1]}' passed! on {_current_test[2][2]}")
+            print(f"'{test_name}' passed! on {test_browser}")
     else:
         # Print the error details
         for test, error in _result.errors:
-            print(f"'{_current_test[1]}' Failed! on {_current_test[2][2]}")
+            print(f"'{test_name}' Failed! on {test_browser}")
             print(f"Error in test '{test.id()}':")
             print(error)
     return _result
