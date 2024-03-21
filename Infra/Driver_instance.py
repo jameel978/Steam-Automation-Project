@@ -71,3 +71,6 @@ class Driverinstance:
 
     def go_to_url(self,url):
         self.driver.get(url)
+
+    def get_cockies(self):
+        return self.driver.get_cookies()

@@ -125,7 +125,7 @@ def get_access_token(driver):
     driver.execute_script("window.open('about:blank', '_blank');")
     # Switch to the newly opened tab
     driver.switch_to.window(driver.window_handles[-1])
-    # Navigate to a webpage (replace URL with your desired webpage)
+    # Navigate to a webpage (replace URL_Add with your desired webpage)
     driver.get("https://store.steampowered.com/pointssummary/ajaxgetasyncconfig")
     # Extract text from the body of the new tab
     body_text = driver.find_element_by_tag_name('body').text

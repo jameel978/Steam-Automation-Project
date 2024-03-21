@@ -1,5 +1,6 @@
 import time
 import unittest
+from Logic.Steam_API.Steam_token_API import *
 from Logic.Website.Cart_page import *
 from Logic.Steam_API.Cart_API import *
 from Infra.Browser_wrapper import *
@@ -13,7 +14,8 @@ class steam_cart_tests(unittest.TestCase):
         self.cap = cap
     def setUp(self):
         self.current_page = Cart_page(self.cap,True)
-        self.access_token = self.current_page.get_access_token()
+        self.api_wrapper = APIWrapper(self.current_page.get_cockies())
+        self.access_token = Steam_Token_API(self.api_wrapper).get_token()
         self.api_wrapper = APIWrapper()
         self.cart_api = Cart_API(self.api_wrapper)
     def tearDown(self):

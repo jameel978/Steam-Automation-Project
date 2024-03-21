@@ -1,4 +1,4 @@
-from Logic.Website.Website_page import Website_page
+from Logic.Website.Website_Page import Website_page
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 

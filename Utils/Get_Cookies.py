@@ -18,7 +18,7 @@ def main():
         else:
             driver = webdriver.Firefox()
         try:
-            driver.get('https://store.steampowered.com/')  # Change the URL to your login page
+            driver.get('https://store.steampowered.com/')  # Change the URL_Add to your login page
 
             input(f"Please log in to {browser}, then press Enter in the terminal...")
             dict_[browser] = driver.get_cookies()

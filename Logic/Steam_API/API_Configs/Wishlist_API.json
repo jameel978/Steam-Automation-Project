@@ -1,0 +1,4 @@
+{
+  "url_add": "https://store.steampowered.com/api/addtowishlist",
+  "url_remove": "https://store.steampowered.com/api/removefromwishlist"
+}

@@ -17,16 +17,17 @@ class Website_page(Driverinstance):
             self.driver.get("https://store.steampowered.com/")
             for cookie in cookies:
                 self.driver.add_cookie(cookie)
-            self.token = self.get_access_token()
-            if self.token is None:
-                self.quit()
-                raise Exception("Filed to get token")
+            #self.token = self.get_access_token()
+            #if self.token is None:
+            #    self.quit()
+            #    raise Exception("Filed to get token")
+
     def get_access_token(self):
         # Open a new tab
         self.driver.execute_script("window.open('about:blank', '_blank');")
         # Switch to the newly opened tab
         self.driver.switch_to.window(self.driver.window_handles[-1])
-        # Navigate to a webpage (replace URL with your desired webpage)
+        # Navigate to a webpage (replace URL_Add with your desired webpage)
         self.driver.get("https://store.steampowered.com/pointssummary/ajaxgetasyncconfig")
         # Extract text from the body of the new tab
         body_text = json.loads(self.driver.find_element(By.TAG_NAME, "body").text)

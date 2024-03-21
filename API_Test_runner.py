@@ -13,9 +13,7 @@ def run_test(current_test):
     suite.addTest(init_test(current_test))
     # Run the test suite
     _result = unittest.TextTestRunner(stream=StringIO(), verbosity=2).run(suite)
-
     # Print the names of tests that passed
-
     if _result.wasSuccessful():
             print(f"'{current_test[1]}' passed!")
     else:
