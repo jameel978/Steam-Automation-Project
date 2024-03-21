@@ -69,6 +69,7 @@ if __name__ == '__main__':
     test_config = read_json(os.path.join(cur_dir, "Tests/Steam_website/Configs/Tests_config.json"))
     browser_caps = BrowserWrapper(test_config).get_caps()
     test_cases_with_caps = [(i,j,(browser)) for i,j in all_test_cases for browser in browser_caps]
+    random.shuffle(test_cases_with_caps)
     test_type = test_config['test_config']["test_type"]
     start_time = time.time()
     results = None

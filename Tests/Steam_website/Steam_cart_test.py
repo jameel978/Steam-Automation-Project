@@ -18,9 +18,11 @@ class steam_cart_tests(unittest.TestCase):
         self.access_token = Steam_Token_API(self.api_wrapper).get_token()
         self.api_wrapper = APIWrapper()
         self.cart_api = Cart_API(self.api_wrapper)
+
     def tearDown(self):
         self.current_page.remove_all_items_from_cart()
         self.current_page.quit()
+
     def test_add_to_cart(self):
         self.current_page.remove_all_items_from_cart()
         self.cart_api.add_to_cart(self.access_token,48700,12397)
