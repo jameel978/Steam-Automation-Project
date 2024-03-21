@@ -13,6 +13,8 @@ jobs:
 
       - name: Set up Java
         uses: actions/setup-java@v4
+        with:
+              java-version: '21'
 
       - name: Set up Python
         uses: actions/setup-python@v5  # Set up Python environment
