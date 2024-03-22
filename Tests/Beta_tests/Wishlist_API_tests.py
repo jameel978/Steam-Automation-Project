@@ -21,9 +21,11 @@ class whishlist_api_tests(unittest.TestCase):
         self.wishlist_api = Wishlist_API(self.api_wrapper)
         self.wishlist_api.add_to_wishlist("1174180")
         self.current_page.refresh_page()
+
     def tearDown(self):
         self.current_page.remove_games_from_wish_list()
         self.current_page.quit()
+
     def test_add_game_to_wishlist(self):
         result = self.current_page.get_wishlist_games_names()
         self.assertIn("Red Dead Redemption 2",result)

@@ -1,9 +1,11 @@
+import importlib
 import random
 import string
 import json
 import inspect
 import types
-import re
+import os
+import unittest
 
 
 def generate_random_username():
@@ -44,10 +46,6 @@ def get_browser_config(location):
 def get_test_config(location):
     return read_json(location)["test_config"][0]
 
-def get_all_tests(my_class):
-    methodList = [v for n, v in inspect.getmembers(my_class, inspect.ismethod) if isinstance(v, types.MethodType)]
-    test_list = [test for test in methodList if "test_" in test.__name__ and "runner" not in test.__name__]
-    return test_list
 
 def get_all_tests(my_class):
     methodList = [v for n, v in inspect.getmembers(my_class, inspect.ismethod) if isinstance(v, types.MethodType)]
@@ -135,4 +133,19 @@ def get_access_token(driver):
     driver.switch_to.window(driver.window_handles[0])
     return body_text.json()
 
-
+def get_unittest_classes(_folder_path):
+    unittest_classes = []
+    # Iterate through files in the folder
+    for file_name in os.listdir(_folder_path):
+        if file_name.endswith('.py'):
+            module_name = os.path.splitext(file_name)[0]
+            module_path = os.path.join(_folder_path, file_name)
+            # Load the module
+            spec = importlib.util.spec_from_file_location(module_name, module_path)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            # Inspect the module for classes that subclass unittest.TestCase
+            for name, obj in inspect.getmembers(module):
+                if inspect.isclass(obj) and issubclass(obj, unittest.TestCase) and obj != unittest.TestCase:
+                    unittest_classes.append(obj)
+    return unittest_classes
