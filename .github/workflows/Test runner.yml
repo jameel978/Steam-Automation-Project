@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5  # Set up Python environment
         with:
-              python-version: '3.10'
+              python-version: '3.9'
 
       - name: Install dependencies
         run: |
@@ -49,14 +49,8 @@ jobs:
       - name: Running Tests
         run: python Test_runner.py
 
-      - name: Upload UI Tests report
+      - name: Upload Tests reports
         uses: actions/upload-artifact@v2
         with:
-          name: UI Tests report
-          path: Results/UI_report.html
-
-      - name: Upload API Tests report
-        uses: actions/upload-artifact@v2
-        with:
-          name: API Tests report
-          path: rResults/API_report.html
+          name: Upload Tests reports
+          path: Results
