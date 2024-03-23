@@ -39,18 +39,16 @@ def find_test_methods(folder_path):
 def run_tests(test_cases,output_folder,run_type = 'serial'):
     pytest_args = []
     for file_path, test_class, test_method in test_cases:
-        report_name = os.path.join(output_folder,f"{test_class}_{test_method}.html")
-        pytest_args.append([f'{file_path}::{test_class}::{test_method}', f'--html={report_name}',"--quiet"])
-    if run_type == "serial":
-        for args in pytest_args:
-            pytest.main(args)
-    else:
-        with ThreadPoolExecutor(max_workers=4) as executor:
-            _results = list(executor.map(pytest.main, pytest_args))
+        pytest_args.append(f'{file_path}::{test_class}::{test_method}')
+    pytest_args.append(f'--html={output_folder}/report.html')
+    pytest_args.append("-n")
+    pytest_args.append("auto")
+    pytest.main(pytest_args)
+
 
 
 if __name__ == "__main__":
-    folder_path = "Tests/Beta_tests"
+    folder_path = "Tests/Steam_website"
     output_folder = "Reports"
     #run_tests(test_folder, output_folder)
     test_methods = find_test_methods(folder_path)

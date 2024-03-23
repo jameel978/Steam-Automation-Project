@@ -7,6 +7,9 @@ import types
 import os
 import unittest
 
+import pytest
+
+from Infra.Browser_wrapper import *
 
 def generate_random_username():
     letters = ''.join(random.choices(string.ascii_letters, k=6))
@@ -149,3 +152,10 @@ def get_unittest_classes(_folder_path):
                 if inspect.isclass(obj) and issubclass(obj, unittest.TestCase) and obj != unittest.TestCase:
                     unittest_classes.append(obj)
     return unittest_classes
+
+
+@pytest.fixture(params=['chrome','edge','firefox'])
+def get_driver(request):
+    browser = request.param
+    print(browser)
+    return BrowserWrapper().get_browser_cap(browser)

@@ -4,6 +4,7 @@ from selenium import webdriver
 class BrowserWrapper:
     def __init__(self,config_ = None):
         if config_ == None:
+            self.test_type = None
             return
         browser_configs = config_['browser_config']
         test_config = config_['test_config']
@@ -27,6 +28,8 @@ class BrowserWrapper:
         elif browser == "firefox":
             options = webdriver.FirefoxOptions()
             browser_webdriver = webdriver.Firefox
+        else:
+            assert Exception("Enter valid browser")
         # Adding argument to disable the AutomationControlled flag
         #options.add_argument("--disable-blink-features=AutomationControlled")
         # Exclude the collection of enable-automation switches
@@ -62,3 +65,4 @@ class BrowserWrapper:
 
     def get_caps(self):
         return self.caps_list
+

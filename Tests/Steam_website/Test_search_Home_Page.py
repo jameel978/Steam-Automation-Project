@@ -2,6 +2,11 @@ import unittest
 from Logic.Website.Home_Page import *
 from Infra.Browser_wrapper import *
 from Utils.Utils import *
+@pytest.fixture(params=['chrome','edge','firefox'])
+def get_driver(request):
+    browser = request.param
+    print(browser)
+    return BrowserWrapper().get_browser_cap(browser)
 
 class building_pc_tests(unittest.TestCase):
     def __init__(self, methodName='runTest', cap=None):

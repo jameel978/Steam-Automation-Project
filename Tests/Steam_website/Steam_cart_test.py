@@ -12,6 +12,7 @@ class steam_cart_tests(unittest.TestCase):
         if cap == None:
             cap = BrowserWrapper().get_default_browser_cap()
         self.cap = cap
+
     def setUp(self):
         self.current_page = Cart_page(self.cap,True)
         self.api_wrapper = APIWrapper(self.current_page.get_cockies())
