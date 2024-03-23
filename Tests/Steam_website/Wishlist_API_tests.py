@@ -37,6 +37,3 @@ class wishlist_api_tests(unittest.TestCase):
         result = self.current_page.get_wishlist_games_count()
         self.assertEqual(result,0)
 
-
-if __name__ == "__main__":
-    unittest.main()

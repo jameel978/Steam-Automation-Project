@@ -36,5 +36,4 @@ class steam_cart_tests(unittest.TestCase):
         title_result = self.current_page.get_items_in_carts_names()
         self.assertIn("Mount & Blade Legacy Collection",title_result)
 
-if __name__ == '__main__':
-    pass
+
