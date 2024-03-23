@@ -18,8 +18,8 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
         pytest_args.append("4")
 
     pytest_args.append("-q")
-    pytest_args.append("--alluredir")
-    pytest_args.append("--allure-results")
+    pytest_args.append("--alluredir=./allure-results")
+
     plugin = ErrorCapturingPlugin()
     pytest.main(pytest_args,plugins=[plugin])
 
