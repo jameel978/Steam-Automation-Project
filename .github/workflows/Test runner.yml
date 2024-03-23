@@ -5,17 +5,12 @@ on: workflow_dispatch
 jobs:
   run_python_script:
     name: Test runner
-    runs-on: windows-latest  # Use the latest version of Windows
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4  # Checkout the repository's code
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-              distribution: 'microsoft'
-              java-version: '21'
 
       - name: Set up Python
         uses: actions/setup-python@v5  # Set up Python environment
@@ -38,22 +33,23 @@ jobs:
         run: python Utils/Create_Tokens.py
 
       - name: Start Selenium Server HUB
-        run: nohup java -jar Utils/selenium-server.jar hub & sleep 10
+        run: nohup java -jar selenium-server.jar hub & sleep 10
         shell: bash
 
       - name: Start Selenium Server nodes
-        run: nohup java -jar Utils/selenium-server.jar node --port 5555 --selenium-manager true & sleep 10
+        run: nohup java -jar selenium-server.jar node --port 5555 --selenium-manager true & sleep 10
         shell: bash
-
 
       - name: Running Tests
         run: python Test_runner.py
+
 
       - name: Upload Tests reports
         uses: actions/upload-artifact@v2
         with:
           name: Upload Tests reports
           path: Results
+
 
       - name: Get Allure history
         uses: actions/checkout@v2
@@ -62,6 +58,7 @@ jobs:
         with:
           ref: gh-pages
           path: gh-pages
+
 
       - name: Test marketplace action
         uses: simple-elf/allure-report-action@master
@@ -73,6 +70,7 @@ jobs:
           allure_report: allure-report
           allure_history: allure-history
 
+
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v2
@@ -80,6 +78,7 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
+
 
       - name: Post the link to the report
         if: always()
@@ -89,4 +88,4 @@ jobs:
           context: 'Test report'
           state: 'success'
           sha: ${{ github.event.pull_request.head.sha }}
-          target_url: simple-elf.github.io/github-allure-history/${{ github.run_number }}
+          target_url: jameel978.github.io/Steam-Automation-Project/${{ github.run_number }}
