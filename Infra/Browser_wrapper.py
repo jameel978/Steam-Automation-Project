@@ -39,12 +39,13 @@ class BrowserWrapper:
             browser_webdriver_args = {'options' : options, 'command_executor': self.test_HUB}
         return browser_webdriver,browser_webdriver_args,browser
 
+
     def get_debug_driver(self):
-        options = webdriver.ChromeOptions()
-        browser_webdriver = webdriver.Chrome
-        #options.add_argument("window-size=1920,1080")
-        options.add_argument("--start-maximized")
-        browser_webdriver_args = {'options': options}
-        return browser_webdriver,browser_webdriver_args,'chrome'
+            options = webdriver.ChromeOptions()
+            browser_webdriver = webdriver.Chrome
+            #options.add_argument("window-size=1920,1080")
+            options.add_argument("--start-maximized")
+            browser_webdriver_args = {'options': options}
+            return browser_webdriver,browser_webdriver_args,'chrome'
 
 

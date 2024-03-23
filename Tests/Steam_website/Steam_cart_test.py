@@ -1,13 +1,17 @@
-import time
-import unittest
 
+import unittest
 from Infra.Api_wrapper import APIWrapper
 from Infra.Browser_wrapper import BrowserWrapper
 from Logic.Steam_API.Cart_API import Cart_API
 from Logic.Steam_API.Steam_token_API import Steam_Token_API
 from Logic.Website.Cart_page import Cart_page
+from parameterized import parameterized_class
+from Utils.Utils import get_browser
 
-@parameterized_class(**get_browser())
+
+
+#@parameterized_class(**get_browser())
+@parameterized_class('browser',[(['chrome']), (['edge']), (['firefox'])])
 class steam_cart_tests(unittest.TestCase):
     browser = None
     def __init__(self, methodName='runTest'):
@@ -31,3 +35,6 @@ class steam_cart_tests(unittest.TestCase):
         self.current_page.refresh_page()
         title_result = self.current_page.get_items_in_carts_names()
         self.assertIn("Mount & Blade Legacy Collection",title_result)
+
+if __name__ == '__main__':
+    pass

@@ -8,7 +8,8 @@ from parameterized import parameterized, parameterized_class
 from Utils.Utils import get_browser
 
 
-@parameterized_class(**get_browser())
+#@parameterized_class(**get_browser())
+@parameterized_class('browser',[(['chrome']), (['edge']), (['firefox'])])
 class wishlist_api_tests(unittest.TestCase):
     browser = None
     def __init__(self, methodName='runTest'):
