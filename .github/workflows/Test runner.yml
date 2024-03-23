@@ -41,8 +41,7 @@ jobs:
         shell: bash
 
       - name: Running Tests
-        run: python ./Test_runner.py
-
+        run: python .Test_Runner.py
 
       - name: Upload Tests reports
         uses: actions/upload-artifact@v2
