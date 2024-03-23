@@ -1,5 +1,5 @@
-from Utils.Utils import *
 import os
+from Utils.Utils import read_json, extract_idf_from_link
 
 
 class Advanced_search_API:

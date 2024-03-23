@@ -1,7 +1,7 @@
 import unittest
 from Logic.Steam_API.APP_Reviews_API import *
 from Infra.Api_wrapper import *
-from Utils.Utils import *
+from Utils.Utils import is_in_range
 
 
 class app_review_api_tests(unittest.TestCase):

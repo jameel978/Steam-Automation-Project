@@ -1,20 +1,21 @@
 import time
 import unittest
-from Logic.Steam_API.Steam_token_API import *
-from Logic.Website.Cart_page import *
-from Logic.Steam_API.Cart_API import *
-from Infra.Browser_wrapper import *
-from Infra.Api_wrapper import *
 
+from Infra.Api_wrapper import APIWrapper
+from Infra.Browser_wrapper import BrowserWrapper
+from Logic.Steam_API.Cart_API import Cart_API
+from Logic.Steam_API.Steam_token_API import Steam_Token_API
+from Logic.Website.Cart_page import Cart_page
+
+@parameterized_class(**get_browser())
 class steam_cart_tests(unittest.TestCase):
-    def __init__(self, methodName='runTest', cap=None):
+    browser = None
+    def __init__(self, methodName='runTest'):
         super().__init__(methodName)
-        if cap == None:
-            cap = BrowserWrapper().get_default_browser_cap()
-        self.cap = cap
 
     def setUp(self):
-        self.current_page = Cart_page(self.cap,True)
+        self.Driver = BrowserWrapper().get_browser(self.browser)
+        self.current_page = Cart_page(self.Driver,True)
         self.api_wrapper = APIWrapper(self.current_page.get_cockies())
         self.access_token = Steam_Token_API(self.api_wrapper).get_token()
         self.api_wrapper = APIWrapper()

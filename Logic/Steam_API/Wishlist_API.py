@@ -1,5 +1,8 @@
-from Utils.Utils import *
+
 import os
+
+from Utils.Utils import read_json
+
 
 class Wishlist_API:
     def __init__(self,my_api):

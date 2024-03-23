@@ -1,22 +1,20 @@
 import unittest
-from Logic.Website.Home_Page import *
-from Infra.Browser_wrapper import *
-from Utils.Utils import *
-@pytest.fixture(params=['chrome','edge','firefox'])
-def get_driver(request):
-    browser = request.param
-    print(browser)
-    return BrowserWrapper().get_browser_cap(browser)
+from Infra.Browser_wrapper import BrowserWrapper
+from Logic.Website.Home_Page import Home_page
+from Utils.Utils import check_keyword_in_all_sentences, get_browser
+from parameterized import parameterized_class
 
-class building_pc_tests(unittest.TestCase):
-    def __init__(self, methodName='runTest', cap=None):
+
+
+@parameterized_class(**get_browser())
+class HomePage_Search_Tests(unittest.TestCase):
+    browser = None
+    def __init__(self, methodName='runTest'):
         super().__init__(methodName)
-        if cap == None:
-            cap = BrowserWrapper().get_default_browser_cap()
-        self.cap = cap
 
     def setUp(self):
-        self.current_page = Home_page(self.cap)
+        self.Driver = BrowserWrapper().get_browser(self.browser)
+        self.current_page = Home_page(self.Driver)
 
     def tearDown(self):
         self.current_page.quit()
@@ -24,15 +22,15 @@ class building_pc_tests(unittest.TestCase):
     def test_search_result(self):
         self.current_page.write_in_search_input("Elden ring")
         result = self.current_page.get_search_results()
-        self.assertEqual("Elden ring",result,"Failed Search Test")
+        self.assertEqual("Elden ring", result, "Failed Search Test")
 
     def test_empty_search(self):
         self.current_page.write_in_search_input("")
         result = self.current_page.get_search_results()
-        self.assertEqual("",result,"Failed Search Test")
+        self.assertEqual("", result, "Failed Search Test")
 
     def test_search_suggestions(self):
-        self.current_page.write_in_search_input("Elden ring",press_return=False)
+        self.current_page.write_in_search_input("Elden ring", press_return=False)
         suggestions = self.current_page.get_search_suggestions()
-        result = check_keyword_in_all_sentences(suggestions,"Elden ring")
-        self.assertTrue(result,"Some suggestions are incorrect")
+        result = check_keyword_in_all_sentences(suggestions, "Elden ring")
+        self.assertTrue(result, "Some suggestions are incorrect")

@@ -2,7 +2,7 @@ import unittest
 from Infra.Api_wrapper import *
 from Logic.Steam_API.Advanced_search_API import *
 from Logic.Steam_API.APP_Details_API import *
-from Utils.Utils import *
+from Utils.Utils import is_sorted_descending, is_sorted_ascending
 
 
 class app_review_api_tests(unittest.TestCase):

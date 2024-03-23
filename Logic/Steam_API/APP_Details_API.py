@@ -1,5 +1,8 @@
-from Utils.Utils import *
+
 import os
+
+from Utils.Utils import read_json
+
 
 class APP_Details_API:
 

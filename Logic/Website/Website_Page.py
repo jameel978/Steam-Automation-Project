@@ -1,11 +1,6 @@
-import pytest
-
 from Infra.Driver_instance import Driverinstance
-from selenium.webdriver.common.by import By
-import json
-from Utils.Utils import *
 import os
-import time
+from Utils.Utils import read_json
 
 
 class Website_page(Driverinstance):

@@ -1,23 +1,23 @@
 import unittest
 
-from Infra.Api_wrapper import *
-from Logic.Website.Wishlist_Page import *
-from Logic.Steam_API.Steam_token_API import *
-from Logic.Steam_API.Wishlist_API import *
-from Infra.Browser_wrapper import *
-from Utils.Utils import *
+from Infra.Api_wrapper import APIWrapper
+from Infra.Browser_wrapper import BrowserWrapper
+from Logic.Steam_API.Wishlist_API import Wishlist_API
+from Logic.Website.Wishlist_Page import Wishlist_Page
+from parameterized import parameterized, parameterized_class
+from Utils.Utils import get_browser
 
-class whishlist_api_tests(unittest.TestCase):
-    def __init__(self, methodName='runTest', cap=None):
+
+@parameterized_class(**get_browser())
+class wishlist_api_tests(unittest.TestCase):
+    browser = None
+    def __init__(self, methodName='runTest'):
         super().__init__(methodName)
-        if cap == None:
-            cap = BrowserWrapper().get_default_browser_cap()
-        self.cap = cap
 
     def setUp(self):
-        self.current_page = Wishlist_Page(self.cap,True)
+        self.Driver = BrowserWrapper().get_browser(self.browser)
+        self.current_page = Wishlist_Page(self.Driver,True)
         self.api_wrapper = APIWrapper(self.current_page.get_cockies())
-        #self.current_token = Steam_Token_API(self.api_wrapper).get_token()
         self.wishlist_api = Wishlist_API(self.api_wrapper)
         self.wishlist_api.add_to_wishlist("1174180")
         self.current_page.refresh_page()
@@ -35,3 +35,7 @@ class whishlist_api_tests(unittest.TestCase):
         self.current_page.refresh_page()
         result = self.current_page.get_wishlist_games_count()
         self.assertEqual(result,0)
+
+
+if __name__ == "__main__":
+    unittest.main()

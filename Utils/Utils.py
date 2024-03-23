@@ -6,21 +6,9 @@ import inspect
 import types
 import os
 import unittest
-
 import pytest
 
-from Infra.Browser_wrapper import *
-
-def generate_random_username():
-    letters = ''.join(random.choices(string.ascii_letters, k=6))
-    numbers = ''.join(random.choices(string.digits, k=6))
-    return letters + numbers
-
-def generate_random_password(length=12):
-    characters = string.ascii_letters + string.digits + string.punctuation
-    return ''.join(random.choice(characters) for _ in range(length))
-
-def check_if_list_is_in_order(lst,order):
+def check_if_list_is_in_order(lst, order):
     if order == "descending":
         for i in range(len(lst) - 1):
             if lst[i] < lst[i + 1]:
@@ -39,15 +27,6 @@ def read_json(location):
     with open(location) as f:
         data = json.load(f)
     return data
-def get_test_variables(location):
-    return read_json(location)["test_variables"][0]
-
-def get_browser_config(location):
-    return read_json(location)["browser_config"]
-
-
-def get_test_config(location):
-    return read_json(location)["test_config"][0]
 
 
 def get_all_tests(my_class):
@@ -55,28 +34,19 @@ def get_all_tests(my_class):
     test_list = [test.__name__ for test in methodList if "test_" in test.__name__]
     return test_list
 
-def prepair_all_tests(test_classes):
-    lst = []
-    for test_class in test_classes:
-        for i in get_all_tests(test_class()):
-            lst.append((test_class,i))
-    return lst
-
-def read_json(location):
-    with open(location) as f:
-        data = json.load(f)
-    return data
-
 
 def extract_idf_from_link(link):
     id = link.split("/")[5]
     return id
 
+
 def is_sorted_descending(nums):
     return all(nums[i] >= nums[i + 1] for i in range(len(nums) - 1))
 
+
 def is_sorted_ascending(nums):
     return all(nums[i] <= nums[i + 1] for i in range(len(nums) - 1))
+
 
 def is_in_range(lst, lower_bound=None, upper_bound=None):
     if lower_bound is not None and upper_bound is not None:
@@ -121,41 +91,41 @@ def check_keyword_in_all_sentences(sentence_list, keyword):
     return True
 
 
-def get_access_token(driver):
-    # Open a new tab
-    driver.execute_script("window.open('about:blank', '_blank');")
-    # Switch to the newly opened tab
-    driver.switch_to.window(driver.window_handles[-1])
-    # Navigate to a webpage (replace URL_Add with your desired webpage)
-    driver.get("https://store.steampowered.com/pointssummary/ajaxgetasyncconfig")
-    # Extract text from the body of the new tab
-    body_text = driver.find_element_by_tag_name('body').text
-    # Close the new tab
-    driver.close()
-    # Switch back to the original tab
-    driver.switch_to.window(driver.window_handles[0])
-    return body_text.json()
+def get_browser():
+    cur_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    config_loca = os.path.join(cur_dir, 'Tests/Steam_website/Configs/', "UI_Tests_Config.json")
+    config_ = read_json(config_loca)['browser_config']
+    input_values = []
+    for browser in config_:
+        input_values.append(([browser]))
+    _args = {'attrs': "browser", "input_values": input_values}
+    return _args
 
-def get_unittest_classes(_folder_path):
-    unittest_classes = []
-    # Iterate through files in the folder
-    for file_name in os.listdir(_folder_path):
-        if file_name.endswith('.py'):
-            module_name = os.path.splitext(file_name)[0]
-            module_path = os.path.join(_folder_path, file_name)
-            # Load the module
-            spec = importlib.util.spec_from_file_location(module_name, module_path)
-            module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(module)
-            # Inspect the module for classes that subclass unittest.TestCase
-            for name, obj in inspect.getmembers(module):
-                if inspect.isclass(obj) and issubclass(obj, unittest.TestCase) and obj != unittest.TestCase:
-                    unittest_classes.append(obj)
-    return unittest_classes
+def find_test_methods(folder_path):
+    test_cases = []
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            if file.endswith('.py'):
+                file_path = os.path.join(root, file)
+                module_name = os.path.splitext(os.path.relpath(file_path, folder_path).replace(os.sep, '.'))[0]
+                spec = importlib.util.spec_from_file_location(module_name, file_path)
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
 
+                for name in dir(module):
+                    obj = getattr(module, name)
+                    if isinstance(obj, type) and issubclass(obj, unittest.TestCase):
+                        test_methods = [method for method in dir(obj) if method.startswith('test_')]
+                        if test_methods:
+                            test_cases.extend([[file_path, obj.__name__, method] for method in test_methods])
+    return test_cases
 
-@pytest.fixture(params=['chrome','edge','firefox'])
-def get_driver(request):
-    browser = request.param
-    print(browser)
-    return BrowserWrapper().get_browser_cap(browser)
+# Custom plugin to capture output
+class ErrorCapturingPlugin:
+    def __init__(self):
+        self.errors = {}
+    def pytest_runtest_logreport(self, report):
+        if report.failed:
+            test_name = report.nodeid
+            error_message = report.longreprtext
+            self.errors[test_name] = error_message

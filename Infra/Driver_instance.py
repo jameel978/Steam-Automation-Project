@@ -3,23 +3,15 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from Utils.Utils import *
+
 import os
 
 
 
 class Driverinstance:
-    def __init__(self,cap):
-        driver = cap[0](**cap[1])
-        self.driver = driver
-        #self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    def __init__(self,driver):
+        self.driver = driver[0](**driver[1])
 
-    def print_html_page(self):
-        # Get the page source (HTML)
-        html = self.driver.page_source
-        # Print the HTML
-        print(html)
-        self.driver.save_screenshot('test.png')
     def get_page_title(self):
         return self.driver.title
 

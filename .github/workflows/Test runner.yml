@@ -46,31 +46,17 @@ jobs:
         shell: bash
 
 
-      - name: Running Selenium Tests
-        run: python Selenium_test_runner.py
+      - name: Running Tests
+        run: python Test_runner.py
 
-      - name: Running API Tests
-        run: python API_Test_runner.py
-
-      - name: Archive result folder
-        uses: actions/upload-artifact@latest.
+      - name: Upload UI Tests report
+        uses: actions/upload-artifact@v2
         with:
-          name: test-results
-          path: Results
+          name: UI Tests report
+          path: Results/UI_report.html
 
-      - name: Checkout code again
-        uses: actions/checkout@latest.
-
-      - name: Download artifact
-        uses: actions/download-artifact@latest
+      - name: Upload API Tests report
+        uses: actions/upload-artifact@v2
         with:
-          name: test-results
-          path: test_results
-
-      - name: Commit and push results
-        run: |
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'actions@users.noreply.github.com'
-          git add .
-          git commit -m "Add test results"
-          git push
+          name: API Tests report
+          path: rResults/API_report.html

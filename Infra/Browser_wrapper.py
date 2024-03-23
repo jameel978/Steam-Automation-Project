@@ -1,22 +1,19 @@
+
 from selenium import webdriver
+import os
+from Utils.Utils import read_json
+
 
 
 class BrowserWrapper:
-    def __init__(self,config_ = None):
-        if config_ == None:
-            self.test_type = None
-            return
-        browser_configs = config_['browser_config']
-        test_config = config_['test_config']
+    def __init__(self):
+        cur_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        config_loca = os.path.join(cur_dir,'Tests/Steam_website/Configs/', "UI_Tests_Config.json")
+        test_config = read_json(config_loca)
         self.test_type = test_config["test_type"] # serial/parallel
         self.test_HUB = test_config["HUB"]
-        caps_list = []
-        for browser in browser_configs:
-            tmp_cap = self.get_browser_cap(browser)
-            caps_list.append(tmp_cap)
-        self.caps_list = caps_list
 
-    def get_browser_cap(self,browser):
+    def get_browser(self,browser):
         options = None
         browser_webdriver = None
         if browser == "chrome":
@@ -29,40 +26,25 @@ class BrowserWrapper:
             options = webdriver.FirefoxOptions()
             browser_webdriver = webdriver.Firefox
         else:
-            assert Exception("Enter valid browser")
-        # Adding argument to disable the AutomationControlled flag
-        #options.add_argument("--disable-blink-features=AutomationControlled")
+            return self.get_debug_driver()
         # Exclude the collection of enable-automation switches
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--headless")
         options.add_argument("window-size=1920,1080")
-        #options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        # Turn-off userAutomationExtension
-        #options.add_experimental_option("useAutomationExtension", False)
-        #options.add_argument("--start-maximized")
         browser_webdriver_args = {'options' : options}
         if self.test_type == "parallel":
             #options.capabilities["platformName"] = "Windows 11"
             browser_webdriver = webdriver.Remote
             browser_webdriver_args = {'options' : options, 'command_executor': self.test_HUB}
-        return browser_webdriver, browser_webdriver_args, browser
+        return browser_webdriver,browser_webdriver_args,browser
 
-    def get_default_browser_cap(self):
+    def get_debug_driver(self):
         options = webdriver.ChromeOptions()
         browser_webdriver = webdriver.Chrome
-        #options.add_argument("--disable-blink-features=AutomationControlled")
-        #options.add_argument("--no-sandbox")
-        #options.add_argument("--disable-dev-shm-usage")
-        #options.add_argument("--headless")
-        options.add_argument("window-size=1920,1080")
-        # Exclude the collection of enable-automation switches
-        #options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        # Turn-off userAutomationExtension
-        #options.add_experimental_option("useAutomationExtension", False)
+        #options.add_argument("window-size=1920,1080")
+        options.add_argument("--start-maximized")
         browser_webdriver_args = {'options': options}
-        return (browser_webdriver, browser_webdriver_args, "chrome")
+        return browser_webdriver,browser_webdriver_args,'chrome'
 
-    def get_caps(self):
-        return self.caps_list
 
