@@ -30,14 +30,14 @@ jobs:
       - name: Create Login Tokens
         env:
           COOKIES: ${{ secrets.COOKIES }}
-        run: python Utils/Create_Tokens.py
+        run: python ./Utils/Create_Tokens.py
 
       - name: Start Selenium Server HUB
-        run: nohup java -jar selenium-server.jar hub & sleep 10
+        run: nohup java -jar ./Utils/selenium-server.jar hub & sleep 10
         shell: bash
 
       - name: Start Selenium Server nodes
-        run: nohup java -jar selenium-server.jar node --port 5555 --selenium-manager true & sleep 10
+        run: nohup java -jar ./Utils/selenium-server.jar node --port 5555 --selenium-manager true & sleep 10
         shell: bash
 
       - name: Running Tests
