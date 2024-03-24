@@ -17,6 +17,12 @@ jobs:
               distribution: 'microsoft'
               java-version: '21'
 
+
+      - name: Set up JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Set up Python
         uses: actions/setup-python@v5  # Set up Python environment
         with:
