@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"a192e0688f97dd1c5cba3b27af002113","name":"Tests.Steam_website","statistic":{"failed":1,"broken":7,"skipped":0,"passed":0,"unknown":0,"total":8}},{"uid":"35e368ab1fefde29bc6e57d6adfd40e4","name":"Tests.Steam_API","statistic":{"failed":0,"broken":0,"skipped":0,"passed":17,"unknown":0,"total":17}}]}
