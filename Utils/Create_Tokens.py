@@ -1,8 +1,6 @@
 import json
-import sys
-import argparse
 import os.path
-import requests
+
 
 
 def create_tokens_file(dictionary, filename='tokens.json'):
@@ -35,23 +33,13 @@ def main():
         "PROJECT_KEY": jira_tokens['PROJECT_KEY'],
         "REPORT_URL": jira_tokens['REPORT_URL'],
         "BRANCH_NAME" :  os.environ['BRANCH_NAME'],
+        "RUN_ID":  os.environ['RUN_ID'],
     }
-    #GET run_id from workflow because it is not supported from github actions ! YET
-    # Define the necessary parameters
-    url = f'https://api.github.com/repos/{os.environ["REPO_NAME"]}/actions/runs/{os.environ["RUN_ID"]}/jobs'
-    headers = {
-        'Accept': 'application/vnd.github+json',
-        'Authorization': f'Bearer {os.environ["G_TOKEN"]}',
-        'X-GitHub-Api-Version': '2022-11-28'
-    }
-    token_response = requests.get(url, headers=headers).json()
-    # Check if the request was successful (status code 200)
 
-    my_tokens['RUN_ID'] = f'{os.environ["RUN_ID"]}_{get_run_id(token_response)}'
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     config = os.path.join(cur_dir, "tokens.json")
     create_tokens_file(my_tokens, config)
-    print(url)
+
 
 if __name__ == "__main__":
     main()
