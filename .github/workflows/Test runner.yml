@@ -77,6 +77,7 @@ jobs:
         with:
           gh_pages: 'gh-pages-dir'
           report_dir: 'allure-results'
+          report_url: 'https://jameel978.github.io/Steam-Automation-Project/${{ github.run_id }}'
 
       - name: Git Commit and Push Action
         uses: mgrybyk/git-commit-pull-push-action@v1
