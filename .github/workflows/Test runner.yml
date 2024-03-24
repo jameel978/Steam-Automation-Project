@@ -52,7 +52,7 @@ jobs:
           COOKIES: ${{ secrets.COOKIES }}
           JIRA_TOKENS: ${{ secrets.JIRA_TOKENS }}
           G_TOKEN: ${{ secrets.G_TOKEN }}
-          RUN_ID: ${{ github.run_id }}"
+          RUN_ID: ${{ github.run_id }}
           REPO_NAME: ${{ github.repository}}
           BRANCH_NAME: ${{ github.ref_name}}
 
