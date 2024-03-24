@@ -1,5 +1,7 @@
 import pytest
 import os
+
+from Infra.Jira_wrapper import jira_wrapper
 from Utils.Utils import read_json, ErrorCapturingPlugin
 
 
@@ -24,11 +26,12 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
     pytest.main(pytest_args,plugins=[plugin])
 
     # Print captured test names and errors
+    jira_instance = jira_wrapper()
     if plugin.errors:
         #print("Errors encountered during testing:")
         for test_name, error_message in plugin.errors.items():
-            pass
             #print(f"Test: {test_name}\nError: {error_message}\n")
+            jira_instance.create_issue(test_name,error_message)
     else:
         pass
         #print("All tests passed!")
