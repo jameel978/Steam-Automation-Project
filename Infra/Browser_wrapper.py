@@ -14,17 +14,15 @@ class BrowserWrapper:
         self.test_HUB = test_config["HUB"]
 
     def get_browser(self,browser):
-        options = None
-        browser_webdriver = None
         if browser == "chrome":
             options = webdriver.ChromeOptions()
-            browser_webdriver = webdriver.Chrome
+            #browser_webdriver = webdriver.Chrome
         elif browser == "edge":
             options = webdriver.EdgeOptions()
-            browser_webdriver = webdriver.Edge
+            #browser_webdriver = webdriver.Edge
         elif browser == "firefox":
             options = webdriver.FirefoxOptions()
-            browser_webdriver = webdriver.Firefox
+            #browser_webdriver = webdriver.Firefox
         else:
             return self.get_debug_driver()
         # Exclude the collection of enable-automation switches
@@ -33,10 +31,10 @@ class BrowserWrapper:
         options.add_argument("--headless")
         options.add_argument("window-size=1920,1080")
         browser_webdriver_args = {'options' : options}
-        if self.test_type == "parallel":
-            #options.capabilities["platformName"] = "Windows 11"
-            browser_webdriver = webdriver.Remote
-            browser_webdriver_args = {'options' : options, 'command_executor': self.test_HUB}
+        #if self.test_type == "parallel":
+        #options.capabilities["platformName"] = "Windows 11"
+        browser_webdriver = webdriver.Remote
+        browser_webdriver_args = {'options' : options, 'command_executor': self.test_HUB}
         return browser_webdriver,browser_webdriver_args,browser
 
 
