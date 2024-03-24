@@ -1,12 +1,11 @@
 import importlib
-import random
-import string
 import json
 import inspect
 import types
 import os
 import unittest
 import pytest
+import platform
 
 def check_if_list_is_in_order(lst, order):
     if order == "descending":
@@ -151,28 +150,26 @@ def add_url_to_description(disc,url):
     return lines + disc
 
 
-import platform
-
 
 def save_environment_info(output_file):
-    requirements_file = 'requirements.txt'
     os_platform = platform.platform()
     os_release = platform.release()
     os_version = platform.version()
     python_version = platform.python_version()
-    java_version = platform.java_ver()
-    javascript_version = platform.node()
 
     with open(output_file, 'w') as f:
         f.write(f"OS_Platform={os_platform}\n")
         f.write(f"OS_Release={os_release}\n")
         f.write(f"OS_Version={os_version}\n")
         f.write(f"Python_Version={python_version}\n")
-        f.write(f"Java_Version={java_version}\n")
-        f.write(f"JavaScript_Version={javascript_version}\n\n")
 
-        f.write("Libraries_specified_in_requirements.txt:\n")
-        with open(requirements_file, 'r') as req_file:
-            requirements = req_file.read().splitlines()
-            for requirement in requirements:
-                f.write(f"{requirement}\n")
+def get_run_id(data):
+    # Check if the data contains 'jobs' key
+    if 'jobs' in data:
+        # Iterate over each job
+        for job in data['jobs']:
+            # Check if 'run_id' is present in the job
+            if 'run_id' in job:
+                return job['run_id']
+    # If run_id is not found, return None
+    return None

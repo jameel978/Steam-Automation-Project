@@ -12,8 +12,8 @@ class APIWrapper:
 
 
 
-    def api_get_request(self, url):
-        self.response = self.my_request.get(url,cookies = self.requests_cookies)
+    def api_get_request(self, url, headers ={}):
+        self.response = self.my_request.get(url,cookies = self.requests_cookies,headers = headers)
         if self.response.ok:
             return self.response
         else:

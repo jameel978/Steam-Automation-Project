@@ -22,9 +22,7 @@ class HomePage_Search_Tests(unittest.TestCase):
 
     def test_search_result(self):
         self.current_page.write_in_search_input("Elden ring")
-        result = self.current_page.get_search_results()
-        #self.assertEqual("Elden ring", result, "Failed Search Test")
-        self.assertEqual("Eldeng", result, "Failed Search Test")
+        self.assertEqual("Eldeng", self.current_page.get_search_results(), "Failed Search Test")
 
     def test_empty_search(self):
         self.current_page.write_in_search_input("")
