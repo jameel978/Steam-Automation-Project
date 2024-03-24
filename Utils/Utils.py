@@ -99,7 +99,6 @@ def get_browser():
     _args = {'attrs': "browser", "input_values": input_values}
     return _args
 
-print(get_browser())
 
 def find_test_methods(folder_path):
     test_cases = []
