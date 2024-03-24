@@ -20,7 +20,7 @@ def main():
         "JIRA_TOKEN": jira_tokens['JIRA_TOKEN'],
         "JIRA_URL": jira_tokens['JIRA_URL'],
         "PROJECT_KEY": jira_tokens['PROJECT_KEY'],
-        "REPORT_URL": jira_tokens['PROJECT_KEY'],
+        "REPORT_URL": jira_tokens['REPORT_URL'],
         "RUN_ID" : f"{os.environ['RUN_ID']}_{os.environ['JOB_ID']}",
         "BRANCH_NAME" :  os.environ['BRANCH_NAME']
     }
