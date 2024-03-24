@@ -1,9 +1,6 @@
 name: Test runner
 
-on:
-  push:
-    branches:
-      - Beta
+on: workflow_dispatch
 
 jobs:
   run_python_script:
