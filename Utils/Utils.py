@@ -146,10 +146,8 @@ def format_test_name(test_name):
     return formatted_string
 
 def add_url_to_description(disc,url):
-    lines = f"Allure Report URL: {url} \n\n\n"
+    lines = f"{url} \n\n\n"
     return lines + disc
-
-
 
 def save_environment_info(output_file):
     os_platform = platform.platform()
@@ -162,14 +160,3 @@ def save_environment_info(output_file):
         f.write(f"OS_Release={os_release}\n")
         f.write(f"OS_Version={os_version}\n")
         f.write(f"Python_Version={python_version}\n")
-
-def get_run_id(data):
-    # Check if the data contains 'jobs' key
-    if 'jobs' in data:
-        # Iterate over each job
-        for job in data['jobs']:
-            # Check if 'run_id' is present in the job
-            if 'run_id' in job:
-                return job['run_id']
-    # If run_id is not found, return None
-    return None

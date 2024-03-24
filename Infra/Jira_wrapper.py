@@ -30,7 +30,7 @@ class jira_wrapper:
         # Replace the branch name placeholder with the actual branch name
         modified_url = REPORT_URL.replace('BranchNamePlaceholder', BRANCH_NAME)
         # Replace the run ID placeholder with the actual run ID
-        modified_url = modified_url.replace('RunIdPlaceholder', RUN_ID)
-        return modified_url
+
+        return f'Allure Report URL: {modified_url} \n Allure RUn ID: {RUN_ID}'
 
 import platform
