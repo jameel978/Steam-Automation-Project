@@ -1,5 +1,6 @@
 import time
-
+import allure
+from allure_commons.types import AttachmentType
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -59,6 +60,7 @@ class Driverinstance:
         self.driver.execute_script("arguments[0].click();", elem)
 
     def quit(self):
+        allure.attach(self.driver.get_screenshot_as_png(), name="Screenshot", attachment_type=AttachmentType.PNG)
         self.driver.quit()
 
     def go_to_url(self,url):
