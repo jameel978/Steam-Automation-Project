@@ -55,7 +55,7 @@ jobs:
           GITHUB_API: ${{ steps.get_job_id.outputs.github_api }}
           COOKIES: ${{ secrets.COOKIES }}
           JIRA_TOKENS: ${{ secrets.JIRA_TOKENS }}
-          RUN_ID: "${{ github.run_id }}_${{$GITHUB_API}}"
+          RUN_ID: "${{ github.run_id }}_${{steps.get_job_id.outputs.github_api }}"
           BRANCH_NAME: ${{ github.ref_name}}
 
         run: python Utils/Create_Tokens.py
