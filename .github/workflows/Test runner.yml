@@ -43,7 +43,7 @@ jobs:
           COOKIES: ${{ secrets.COOKIES }}
           JIRA_TOKENS: ${{ secrets.JIRA_TOKENS }}
           RUN_ID: ${{ github.run_id }}
-          BRANCH_NAME: ${{ github.ref | basename }}
+          BRANCH_NAME: ${{ github.ref_name}}
         run: python Utils/Create_Tokens.py
 
 
