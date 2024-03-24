@@ -16,9 +16,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          jobs=$(gh api repos/${{ github.repository }}/actions/runs/${{ github.run_id}}/attempts/${{ github.run_attempt }}/jobs)
-          job_id=$(echo $jobs | jq -r '.jobs[] | select(.runner_name=="${{ runner.name }}") | .id')
-          echo "job_id=$job_id" >> $GITHUB_OUTPUT
+          set GH_REPO=%GITHUB_REPOSITORY%
+          set GH_RUN_ID=%GITHUB_RUN_ID%
+          set GH_RUN_ATTEMPT=%GITHUB_RUN_ATTEMPT%
+          set RUNNER_NAME=%RUNNER_NAME%
+          for /f "usebackq tokens=*" %%A in (`gh api repos/%GH_REPO%/actions/runs/%GH_RUN_ID%/attempts/%GH_RUN_ATTEMPT%/jobs`) do (
+            set jobs=%%A
+          )
+          for /f "tokens=*" %%B in ('echo %jobs% ^| jq -r ".jobs[] | select(.runner_name==\"%RUNNER_NAME%\") | .id"') do (
+            set job_id=%%B
+          )
+          echo job_id=!job_id! >> %GITHUB_ENV%
 
       - name: Display Job ID
         run: |
