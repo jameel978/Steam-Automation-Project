@@ -43,13 +43,11 @@ jobs:
 
         run: python Utils/Create_Tokens.py
 
-
       - uses: browser-actions/setup-chrome@latest
 
       - uses: browser-actions/setup-edge@latest
 
       - uses: browser-actions/setup-firefox@latest
-
 
       - name: Start Selenium Server HUB
         run: nohup java -jar Utils/selenium-server.jar hub & sleep 10
