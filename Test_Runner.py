@@ -36,8 +36,8 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
 
 if __name__ == "__main__":
     cur_dir = os.path.dirname(os.path.abspath(__file__))
-    API_Tests = os.path.join(cur_dir, "Tests/Steam_API/")
-    test_config = read_json(os.path.join(cur_dir, "/Tests/Steam_API/Config/API_Tests_Config.json"))
+    API_Tests = os.path.join(cur_dir, "./Tests/Steam_API/")
+    test_config = read_json(os.path.join(cur_dir, "./Tests/Steam_API/Config/API_Tests_Config.json"))
     test_type = test_config["test_type"]
     run_tests(API_Tests, 'Results',"API",test_type)
 
