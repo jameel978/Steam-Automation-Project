@@ -146,7 +146,6 @@ def format_test_name(test_name):
 
     return formatted_string
 
-
 def add_url_to_description(disc,url):
     lines = f"Allure Report URL: {url} \n\n\n"
     return lines + disc

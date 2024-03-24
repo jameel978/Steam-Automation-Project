@@ -77,7 +77,7 @@ jobs:
         if: always()
         continue-on-error: true
         with:
-          gh_pages: "gh-pages-dir'
+          gh_pages: 'gh-pages-dir'
           report_dir: 'allure-results'
 
 
