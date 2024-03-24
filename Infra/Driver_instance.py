@@ -67,7 +67,7 @@ class Driverinstance:
         return self.driver.get_cookies()
 
     def allure_take_screenshot(self):
-        allure.attach(self.driver.get_screenshot_as_png(), name="Screenshot", attachment_type=AttachmentType.PNG)
+        allure.attach(self.driver.find_element(By.TAG_NAME, "body").get_screenshot_as_png(), name="Screenshot", attachment_type=AttachmentType.PNG)
 
     def move_by_offset(self,elem,pix):
         action = ActionChains(self.driver)
