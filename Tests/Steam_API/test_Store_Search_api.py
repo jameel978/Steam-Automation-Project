@@ -17,9 +17,9 @@ class store_search_tests(unittest.TestCase):
 
     def test_store_search_found_apps(self):
         app_ids = self.store_search.get_app_id_from_app_details(self.search_result)
-        for name, id in zip(self.app_names, app_ids):
+        for name, _id in zip(self.app_names, app_ids):
             details_api = APP_Details_API(self.api_wrapper)
-            app_details = details_api.get_app_details(id)
+            app_details = details_api.get_app_details(_id)
             app_name = details_api.get_app_name_from_app_details(app_details)
             self.assertEqual(app_name, name,f"Found app name {app_name}, Expected app name {name}")
 

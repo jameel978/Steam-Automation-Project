@@ -25,11 +25,13 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
 
     # Print captured test names and errors
     if plugin.errors:
-        print("Errors encountered during testing:")
+        #print("Errors encountered during testing:")
         for test_name, error_message in plugin.errors.items():
-            print(f"Test: {test_name}\nError: {error_message}\n")
+            pass
+            #print(f"Test: {test_name}\nError: {error_message}\n")
     else:
-        print("All tests passed!")
+        pass
+        #print("All tests passed!")
 
 
 if __name__ == "__main__":
