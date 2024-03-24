@@ -176,8 +176,3 @@ def save_environment_info(output_file):
             requirements = req_file.read().splitlines()
             for requirement in requirements:
                 f.write(f"{requirement}\n")
-
-
-
-output_file = 'environment.properties'
-
