@@ -49,7 +49,7 @@ class Search_page(Website_page):
 
 
 
-    def __init__(self, cap, login):
+    def __init__(self, cap, login = False):
         super().__init__(cap, login)
         self.PAGE_URL = self.Website_URLS['Search_page']
         self.go_to_url(self.PAGE_URL)

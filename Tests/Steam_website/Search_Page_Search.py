@@ -43,11 +43,11 @@ class HomePage_Search_Tests(unittest.TestCase):
 
     def test_hide_owned_from_search(self):
         self.current_page.hide_owned_games()
-        result = self.current_page.check_if_game_in_page(730)
-        self.assertFalse(result,f"Counter-Strike 2 was found in the result")
+        result = self.current_page.check_if_game_in_page(self.test_params['owned_game'])
+        self.assertFalse(result,f"{self.test_params['owned_game_name']} was found in the result")
 
     def test_price_slider(self):
-        self.current_page.move_price_slider(-200)
+        self.current_page.move_price_slider(self.test_params['slider_free_games_value'])
         prices_results = self.current_page.get_games_prices()
         for result in prices_results:
             game_name, game_price = result

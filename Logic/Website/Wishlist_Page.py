@@ -12,7 +12,7 @@ class Wishlist_Page(Website_page):
     REMOVE_GAME_FROM_WISHLIST = "//div[@class='delete']"
     CONFIRM_GAME_REMOVE = "//span[normalize-space()='OK']"
 
-    def __init__(self, cap, login):
+    def __init__(self, cap, login = False):
         super().__init__(cap, login)
         self.PAGE_URL = self.Website_URLS['Wishlist_Page']
         self.go_to_url(self.PAGE_URL)

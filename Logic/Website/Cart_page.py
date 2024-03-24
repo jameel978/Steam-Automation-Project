@@ -14,7 +14,7 @@ class Cart_page(Website_page):
     TITLE = "//div[@class='pVXX8Pzc4JbT40TP4RwRG']"
     EMPTY_CART = "//div[normalize-space()='Your cart is empty.']"
 
-    def __init__(self, cap, login):
+    def __init__(self, cap, login = False):
         super().__init__(cap, login)
         self.PAGE_URL = self.Website_URLS['Cart_page']
         self.go_to_url(self.PAGE_URL)
