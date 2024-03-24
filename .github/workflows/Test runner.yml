@@ -8,8 +8,20 @@ jobs:
     runs-on: windows-latest  # Use the latest version of Windows
 
     steps:
+
+
       - name: Checkout code
         uses: actions/checkout@v4  # Checkout the repository's code
+
+      - name: Get Current Job Log URL
+        uses: Tiryoh/gha-jobid-action@v0
+        id: jobs
+        with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            job_name: ${{ github.job }}
+
+      - name: Output Current Job Log URL
+        run: echo ${{ steps.jobs.outputs.html_url }}
 
       - name: Set up Java
         uses: actions/setup-java@v4
