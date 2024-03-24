@@ -41,6 +41,7 @@ jobs:
       - name: Create Login Tokens
         env:
           COOKIES: ${{ secrets.COOKIES }}
+          JIRA_TOKENS: ${{ secrets.JIRA_TOKENS }}
         run: python Utils/Create_Tokens.py
 
 
