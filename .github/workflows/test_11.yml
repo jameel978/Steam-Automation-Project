@@ -1,105 +1,23 @@
-name: Test runner
+name: get id test
 
 on: workflow_dispatch
 
 jobs:
   run_python_script:
-    name: Test runner
+    name: get id test
     runs-on: windows-latest  # Use the latest version of Windows
 
     steps:
-
-
-      - name: Checkout code
-        uses: actions/checkout@v4  # Checkout the repository's code
-
-      - name: Get Current Job Log URL
-        uses: Tiryoh/gha-jobid-action@v0
-        id: jobs
-        with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            job_name: ${{ github.job }}
-
-      - name: Output Current Job Log URL
-        run: echo ${{ steps.jobs.outputs.html_url }}
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-              distribution: 'microsoft'
-              java-version: '21'
-
-
-      - name: Set up JS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Set up Python
-        uses: actions/setup-python@v5  # Set up Python environment
-        with:
-              python-version: '3.9'
-
-      - name: Install dependencies
-        run: |
-          pip install -r Utils/requirements.txt 
-
-      - uses: browser-actions/setup-chrome@latest
-
-      - uses: browser-actions/setup-edge@latest
-
-      - uses: browser-actions/setup-firefox@latest
-
-      - name: Start Selenium Server HUB
-        run: nohup java -jar Utils/selenium-server.jar hub & sleep 10
-        shell: bash
-
-      - name: Start Selenium Server nodes
-        run: nohup java -jar Utils/selenium-server.jar node --port 5555 --selenium-manager true & sleep 10
-        shell: bash
-
-
-      - name: Create Login Tokens
+      - name: Get Job ID from GH API
+        id: get-job-id
         env:
-          COOKIES: ${{ secrets.COOKIES }}
-          JIRA_TOKENS: ${{ secrets.JIRA_TOKENS }}
-          G_TOKEN: ${{ secrets.G_TOKEN }}
-          RUN_ID: ${{ github.run_id }}
-          REPO_NAME: ${{ github.repository}}
-          BRANCH_NAME: ${{ github.ref_name}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          jobs=$(gh api repos/${{ github.repository }}/actions/runs/${{ github.run_id}}/attempts/${{ github.run_attempt }}/jobs)
+          job_id=$(echo $jobs | jq -r '.jobs[] | select(.runner_name=="${{ runner.name }}") | .id')
+          echo "job_id=$job_id" >> $GITHUB_OUTPUT
 
-        run: python Utils/Create_Tokens.py
-
-      - name: Running Tests
-        run: python Test_runner.py
-
-      - name: Upload Tests reports
-        uses: actions/upload-artifact@v2
-        with:
-          name: Upload Tests reports
-          path: Results
-
-      - name: Checkout gh-pages
-        uses: actions/checkout@v4
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages # branch name
-          path: gh-pages-dir # checkout path
-
-      - name: Allure Report Action
-        uses: mgrybyk/allure-report-branch-js-action@v1
-        if: always()
-        continue-on-error: true
-        with:
-          gh_pages: 'gh-pages-dir'
-          report_dir: 'allure-results'
-
-
-      - name: Git Commit and Push Action
-        uses: mgrybyk/git-commit-pull-push-action@v1
-        if: always()
-        with:
-          repository: gh-pages-dir
-          branch: gh-pages
-          pull_args: --rebase -X ours
+      - name: Display Job ID
+        run: |
+          echo Job ID: ${{ steps.get-job-id.outputs.job_id }}
+          echo My full job URL is ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.get-job-id.outputs.job_id }}

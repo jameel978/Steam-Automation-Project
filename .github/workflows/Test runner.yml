@@ -8,20 +8,8 @@ jobs:
     runs-on: windows-latest  # Use the latest version of Windows
 
     steps:
-
-
       - name: Checkout code
         uses: actions/checkout@v4  # Checkout the repository's code
-
-      - name: Get Current Job Log URL
-        uses: Tiryoh/gha-jobid-action@v0
-        id: jobs
-        with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            job_name: ${{ github.job }}
-
-      - name: Output Current Job Log URL
-        run: echo ${{ steps.jobs.outputs.html_url }}
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -50,6 +38,15 @@ jobs:
 
       - uses: browser-actions/setup-firefox@latest
 
+      - name: Create Login Tokens
+        env:
+          COOKIES: ${{ secrets.COOKIES }}
+          JIRA_TOKENS: ${{ secrets.JIRA_TOKENS }}
+          RUN_ID: ${{ github.run_id }}
+          BRANCH_NAME: ${{ github.ref_name}}
+        run: python Utils/Create_Tokens.py
+
+
       - name: Start Selenium Server HUB
         run: nohup java -jar Utils/selenium-server.jar hub & sleep 10
         shell: bash
@@ -57,18 +54,6 @@ jobs:
       - name: Start Selenium Server nodes
         run: nohup java -jar Utils/selenium-server.jar node --port 5555 --selenium-manager true & sleep 10
         shell: bash
-
-
-      - name: Create Login Tokens
-        env:
-          COOKIES: ${{ secrets.COOKIES }}
-          JIRA_TOKENS: ${{ secrets.JIRA_TOKENS }}
-          G_TOKEN: ${{ secrets.G_TOKEN }}
-          RUN_ID: ${{ github.run_id }}
-          REPO_NAME: ${{ github.repository}}
-          BRANCH_NAME: ${{ github.ref_name}}
-
-        run: python Utils/Create_Tokens.py
 
       - name: Running Tests
         run: python Test_runner.py
