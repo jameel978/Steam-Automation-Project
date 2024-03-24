@@ -6,16 +6,15 @@ from selenium.webdriver.common.keys import Keys
 
 
 class Wishlist_Page(Website_page):
-    PAGE_URL = "https://store.steampowered.com/wishlist/"
 
     WISHLIST_GAMES = "//div[@class='wishlist_row']"
     WISHLIST_GAME_NAME = "//div[@class='content']//a[@class='title']"
     REMOVE_GAME_FROM_WISHLIST = "//div[@class='delete']"
-
     CONFIRM_GAME_REMOVE = "//span[normalize-space()='OK']"
 
     def __init__(self, cap, login):
         super().__init__(cap, login)
+        self.PAGE_URL = self.Website_URLS['Wishlist_Page']
         self.go_to_url(self.PAGE_URL)
 
     def get_wishlist_games_count(self):

@@ -1,11 +1,14 @@
+import os
+
 from Logic.Website.Website_Page import Website_page
 from selenium.webdriver.common.keys import Keys
 
+from Utils.Utils import read_json
+
 
 class Home_page(Website_page):
-    PAGE_URL = "https://store.steampowered.com/"
-    SEARCH_INPUT = "//input[@id='store_nav_search_term']"
 
+    SEARCH_INPUT = "//input[@id='store_nav_search_term']"
     SEARCH_SUG = "//div[@id='search_suggestion_contents']//a//div[@class='match_name ']"
 
     #AFTER SEARCH
@@ -13,6 +16,7 @@ class Home_page(Website_page):
 
     def __init__(self, driver):
         super().__init__(driver)
+        self.PAGE_URL = self.Website_URLS['Home_page']
         self.go_to_url(self.PAGE_URL)
 
     def write_in_search_input(self, txt,press_return = True):

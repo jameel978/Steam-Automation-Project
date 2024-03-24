@@ -1,18 +1,22 @@
+import os
+
 from Logic.Website.Website_Page import Website_page
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+from Utils.Utils import read_json
+
 
 class Cart_page(Website_page):
-    PAGE_URL = "https://store.steampowered.com/cart"
 
     CART_ITEMS = "//div//div//div//div//div//div//div[@class='Panel Focusable']"
     REMOVE_BUTTON = "//*[contains(text(),'Remove')]"
     TITLE = "//div[@class='pVXX8Pzc4JbT40TP4RwRG']"
-
     EMPTY_CART = "//div[normalize-space()='Your cart is empty.']"
+
     def __init__(self, cap, login):
         super().__init__(cap, login)
+        self.PAGE_URL = self.Website_URLS['Cart_page']
         self.go_to_url(self.PAGE_URL)
 
 
@@ -35,7 +39,6 @@ class Cart_page(Website_page):
     def remove_item_from_cart(self,elem):
         remove_button = elem.find_element(By.XPATH,self.REMOVE_BUTTON)
         remove_button.click()
-
 
     def check_if_cart_is_empty(self):
         try:
