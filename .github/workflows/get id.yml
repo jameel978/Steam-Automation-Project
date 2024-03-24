@@ -1,6 +1,9 @@
 name: get id test
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - Beta
 
 jobs:
   run_python_script:
