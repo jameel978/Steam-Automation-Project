@@ -128,3 +128,21 @@ class ErrorCapturingPlugin:
             test_name = report.nodeid
             error_message = report.longreprtext
             self.errors[test_name] = error_message
+
+
+def format_test_name(test_name):
+    # Split the test name by '::' to extract relevant information
+    parts = test_name.split("::")
+
+    # Extract relevant parts from the split test name
+    test_case = parts[-1]
+    browser = parts[-2].split("_")[-1]  # Extract browser type
+    test_suite = parts[-3].split("_")[1:]  # Extract test suite
+
+    # Capitalize the first letter of each word in the test suite
+    test_suite = ' '.join(word.capitalize() for word in test_suite)
+
+    # Construct the formatted string
+    formatted_string = f"{test_case} on {browser} failed in {test_suite}"
+
+    return formatted_string

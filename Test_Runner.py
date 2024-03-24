@@ -2,7 +2,7 @@ import pytest
 import os
 
 from Infra.Jira_wrapper import jira_wrapper
-from Utils.Utils import read_json, ErrorCapturingPlugin
+from Utils.Utils import read_json, ErrorCapturingPlugin, format_test_name
 
 
 def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
@@ -28,13 +28,10 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
     # Print captured test names and errors
     jira_instance = jira_wrapper()
     if plugin.errors:
-        #print("Errors encountered during testing:")
         for test_name, error_message in plugin.errors.items():
-            #print(f"Test: {test_name}\nError: {error_message}\n")
+            bug_name = format_test_name(test_name)
             jira_instance.create_issue(test_name,error_message)
-    else:
-        pass
-        #print("All tests passed!")
+
 
 
 if __name__ == "__main__":
