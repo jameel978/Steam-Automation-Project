@@ -32,12 +32,6 @@ jobs:
         run: |
           pip install -r Utils/requirements.txt 
 
-      - uses: browser-actions/setup-chrome@latest
-
-      - uses: browser-actions/setup-edge@latest
-
-      - uses: browser-actions/setup-firefox@latest
-
       - name: Create Login Tokens
         env:
           COOKIES: ${{ secrets.COOKIES }}
@@ -48,6 +42,14 @@ jobs:
           BRANCH_NAME: ${{ github.ref_name}}
 
         run: python Utils/Create_Tokens.py
+
+
+      - uses: browser-actions/setup-chrome@latest
+
+      - uses: browser-actions/setup-edge@latest
+
+      - uses: browser-actions/setup-firefox@latest
+
 
       - name: Start Selenium Server HUB
         run: nohup java -jar Utils/selenium-server.jar hub & sleep 10

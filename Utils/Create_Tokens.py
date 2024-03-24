@@ -2,8 +2,7 @@ import json
 import sys
 import argparse
 import os.path
-
-from Infra.Api_wrapper import APIWrapper
+import requests
 
 
 def create_tokens_file(dictionary, filename='tokens.json'):
@@ -45,7 +44,9 @@ def main():
         'Authorization': f'Bearer {os.environ["G_TOKEN"]}',
         'X-GitHub-Api-Version': '2022-11-28'
     }
-    token_response = APIWrapper().api_get_request(url,headers).json()
+    token_response = requests.get(url, headers=headers).json()
+    # Check if the request was successful (status code 200)
+
     my_tokens['RUN_ID'] = f'{os.environ["RUN_ID"]}_{get_run_id(token_response)}'
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     config = os.path.join(cur_dir, "tokens.json")
