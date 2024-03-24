@@ -22,3 +22,13 @@ class jira_wrapper:
         }
         new_issue = self.auth_jira.create_issue(fields=issue_dict)
         return new_issue.key
+
+    def get_report_url(self):
+        REPORT_URL = self.config['REPORT_URL']
+        RUN_ID = self.config['RUN_ID']
+        BRANCH_NAME = self.config['BRANCH_NAME']
+        # Replace the branch name placeholder with the actual branch name
+        modified_url = REPORT_URL.replace('BranchNamePlaceholder', BRANCH_NAME)
+        # Replace the run ID placeholder with the actual run ID
+        modified_url = modified_url.replace('RunIdPlaceholder', RUN_ID)
+        return modified_url

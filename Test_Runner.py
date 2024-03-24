@@ -2,7 +2,7 @@ import pytest
 import os
 
 from Infra.Jira_wrapper import jira_wrapper
-from Utils.Utils import read_json, ErrorCapturingPlugin, format_test_name
+from Utils.Utils import read_json, ErrorCapturingPlugin, format_test_name, add_url_to_description
 
 
 def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
@@ -30,7 +30,8 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
     if plugin.errors:
         for test_name, error_message in plugin.errors.items():
             bug_name = format_test_name(test_name)
-            jira_instance.create_issue(test_name,error_message)
+            description = add_url_to_description(error_message,jira_instance.get_report_url())
+            jira_instance.create_issue(bug_name,description)
 
 
 

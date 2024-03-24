@@ -42,6 +42,8 @@ jobs:
         env:
           COOKIES: ${{ secrets.COOKIES }}
           JIRA_TOKENS: ${{ secrets.JIRA_TOKENS }}
+          RUN_ID: ${{ github.run_id }}
+          BRANCH_NAME: ${{ github.ref | basename }}
         run: python Utils/Create_Tokens.py
 
 
@@ -77,7 +79,7 @@ jobs:
         with:
           gh_pages: 'gh-pages-dir'
           report_dir: 'allure-results'
-          report_url: 'https://jameel978.github.io/Steam-Automation-Project/${{ github.run_id }}'
+          report_url: 'https://jameel978.github.io/Steam-Automation-Project/'
 
       - name: Git Commit and Push Action
         uses: mgrybyk/git-commit-pull-push-action@v1

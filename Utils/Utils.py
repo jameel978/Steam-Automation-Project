@@ -133,16 +133,23 @@ class ErrorCapturingPlugin:
 def format_test_name(test_name):
     # Split the test name by '::' to extract relevant information
     parts = test_name.split("::")
-
     # Extract relevant parts from the split test name
     test_case = parts[-1]
-    browser = parts[-2].split("_")[-1]  # Extract browser type
-    test_suite = parts[-3].split("_")[1:]  # Extract test suite
-
-    # Capitalize the first letter of each word in the test suite
-    test_suite = ' '.join(word.capitalize() for word in test_suite)
+    test_suite = parts[-3]  # Extract test suite
 
     # Construct the formatted string
-    formatted_string = f"{test_case} on {browser} failed in {test_suite}"
+    if test_name.split("/")[1] == "Steam_website":
+        browser = parts[-2].split("_")[-1]  # Extract browser type
+        formatted_string = f"{test_case} on {browser} failed in {test_suite}"
+    else:
+        formatted_string = f"{test_case} failed in {test_suite}"
 
     return formatted_string
+
+
+def add_url_to_description(disc,url):
+    lines = f"Allure Report URL: {url} \n\n\n"
+    return lines + disc
+
+
+
