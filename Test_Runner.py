@@ -35,7 +35,6 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
 
 
 if __name__ == "__main__":
-    print(f"url: {jira_wrapper().get_report_url()}")
     API_Tests = "Tests/Steam_API"
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     test_config = read_json(os.path.join(cur_dir, "Tests/Steam_API/Configs/API_Tests_Config.json"))
