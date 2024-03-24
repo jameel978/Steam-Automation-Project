@@ -14,8 +14,8 @@ class Home_page(Website_page):
     #AFTER SEARCH
     SEARCH_RESULT = "//div[@class='page_header_ctn search ']//div[@class='page_content']//div[@class='termcontainer']//div[@class='searchtag tag_dynamic']"
 
-    def __init__(self, driver):
-        super().__init__(driver)
+    def __init__(self, cap, login):
+        super().__init__(cap, login)
         self.PAGE_URL = self.Website_URLS['Home_page']
         self.go_to_url(self.PAGE_URL)
 

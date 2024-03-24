@@ -4,7 +4,7 @@ from allure_commons.types import AttachmentType
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import os
+from selenium.webdriver.common.action_chains import ActionChains
 
 class Driverinstance:
     def __init__(self,driver):
@@ -69,3 +69,6 @@ class Driverinstance:
     def allure_take_screenshot(self):
         allure.attach(self.driver.get_screenshot_as_png(), name="Screenshot", attachment_type=AttachmentType.PNG)
 
+    def move_by_offset(self,elem,pix):
+        action = ActionChains(self.driver)
+        action.drag_and_drop_by_offset(elem, pix, 0).perform()

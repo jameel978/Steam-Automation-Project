@@ -35,5 +35,3 @@ class Store_Search_API:
             ans_.append(str(app['id']))
         return ans_
 
-
-
