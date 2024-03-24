@@ -80,6 +80,7 @@ jobs:
           gh_pages: "gh-pages-dir'
           report_dir: 'allure-results'
 
+
       - name: Git Commit and Push Action
         uses: mgrybyk/git-commit-pull-push-action@v1
         if: always()
