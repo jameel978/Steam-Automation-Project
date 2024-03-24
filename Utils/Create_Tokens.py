@@ -11,6 +11,7 @@ def create_tokens_file(dictionary, filename='tokens.json'):
 def main():
     env_cookies = json.loads(os.environ['COOKIES'])
     jira_tokens = json.loads(os.environ['JIRA_TOKENS'])
+
     my_tokens = {
         "chrome": env_cookies['chrome'],
         "firefox": env_cookies['firefox'],
