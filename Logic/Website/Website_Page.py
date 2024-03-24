@@ -9,12 +9,12 @@ class Website_page(Driverinstance):
     def __init__(self, cap, login=False):
         super().__init__(cap)
         self.token = None
+        self.Website_URLS = read_json(
+            os.path.join(os.path.dirname(os.path.abspath(__file__)), "Configs", "Website_URLS.json"))
         if login:
             browser = cap[2]
             cur_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
             cookies = read_json(os.path.join(cur_dir, "Utils", "tokens.json"))[browser]
-            cur_dir = os.path.dirname(os.path.abspath(__file__))
-            self.Website_URLS = read_json(os.path.join(cur_dir, "Configs", "Website_URLS.json"))
             self.driver.get(self.Website_URLS['Home_page'])
             for cookie in cookies:
                 self.driver.add_cookie(cookie)

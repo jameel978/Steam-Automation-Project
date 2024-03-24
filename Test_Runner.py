@@ -38,7 +38,7 @@ if __name__ == "__main__":
     print(f"url: {jira_wrapper().get_report_url()}")
     API_Tests = "Tests/Steam_API"
     cur_dir = os.path.dirname(os.path.abspath(__file__))
-    test_config = read_json(os.path.join(cur_dir, "Tests/Steam_API/Config/API_Tests_Config.json"))
+    test_config = read_json(os.path.join(cur_dir, "Tests/Steam_API/Configs/API_Tests_Config.json"))
     test_type = test_config["test_type"]
     run_tests(API_Tests, 'Results',"API",test_type)
     UI_Tests = "Tests/Steam_website"

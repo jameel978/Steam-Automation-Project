@@ -8,7 +8,7 @@ class store_search_tests(unittest.TestCase):
 
     def __init__(self, methodName='runTest'):
         super().__init__(methodName)
-        self.test_params = read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "Config", f"{os.path.basename(__file__)[:-3]}.json"))
+        self.test_params = read_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "Configs", f"{os.path.basename(__file__)[:-3]}.json"))
     
     def setUp(self) -> None:
         self.api_wrapper = APIWrapper()
