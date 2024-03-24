@@ -5,7 +5,7 @@ from Utils.Utils import read_json, ErrorCapturingPlugin
 
 def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
     pytest_args = []
-    pytest_args.append("-v")
+    #pytest_args.append("-v")
 
     #for file_path, test_class, test_method in test_cases:
     #    pytest_args.append(f'{file_path}::{test_class}::{test_method}')
