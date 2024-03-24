@@ -5,22 +5,27 @@ on: workflow_dispatch
 jobs:
   run_python_script:
     name: Test runner
-    runs-on: ubuntu-latest
+    runs-on: windows-latest  # Use the latest version of Windows
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4  # Checkout the repository's code
 
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+              distribution: 'microsoft'
+              java-version: '21'
 
       - name: Set up Python
         uses: actions/setup-python@v5  # Set up Python environment
         with:
-              python-version: '3.11'
+              python-version: '3.9'
 
       - name: Install dependencies
         run: |
           pip install -r Utils/requirements.txt 
-          
+
       - uses: browser-actions/setup-chrome@latest
 
       - uses: browser-actions/setup-edge@latest
@@ -30,8 +35,48 @@ jobs:
       - name: Create Login Tokens
         env:
           COOKIES: ${{ secrets.COOKIES }}
-        run: python ./Utils/Create_Tokens.py
+        run: python Utils/Create_Tokens.py
+
+      - name: Start Selenium Server HUB
+        run: nohup java -jar Utils/selenium-server.jar hub & sleep 10
+        shell: bash
+
+      - name: Start Selenium Server nodes
+        run: nohup java -jar Utils/selenium-server.jar node --port 5555 --selenium-manager true & sleep 10
+        shell: bash
+
 
       - name: Running Tests
-        run: python Test_Runner.py
+        run: python Test_runner.py
 
+      - name: Upload Tests reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: Upload Tests reports
+          path: Results
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages # branch name
+          path: gh-pages-dir # checkout path
+
+      - name: Allure Report Action
+        uses: mgrybyk/allure-report-branch-js-action@v1
+        if: always()
+        continue-on-error: true
+        id: allure # used in comment to PR
+        with:
+          report_id: 'self-test'
+          gh_pages: 'gh-pages-dir'
+          report_dir: 'allure-results'
+
+      - name: Git Commit and Push Action
+        uses: mgrybyk/git-commit-pull-push-action@v1
+        if: always()
+        with:
+          repository: gh-pages-dir
+          branch: gh-pages
+          pull_args: --rebase -X ours
