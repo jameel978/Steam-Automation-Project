@@ -13,7 +13,6 @@ class Website_page(Driverinstance):
             browser = cap[2]
             cur_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
             cookies = read_json(os.path.join(cur_dir, "Utils", "tokens.json"))[browser]
-
             cur_dir = os.path.dirname(os.path.abspath(__file__))
             self.Website_URLS = read_json(os.path.join(cur_dir, "Configs", "Website_URLS.json"))
             self.driver.get(self.Website_URLS['Home_page'])

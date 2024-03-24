@@ -4,10 +4,7 @@ from allure_commons.types import AttachmentType
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 import os
-
-
 
 class Driverinstance:
     def __init__(self,driver):
@@ -60,7 +57,7 @@ class Driverinstance:
         self.driver.execute_script("arguments[0].click();", elem)
 
     def quit(self):
-        allure.attach(self.driver.get_screenshot_as_png(), name="Screenshot", attachment_type=AttachmentType.PNG)
+        self.allure_take_screenshot()
         self.driver.quit()
 
     def go_to_url(self,url):
@@ -68,3 +65,7 @@ class Driverinstance:
 
     def get_cockies(self):
         return self.driver.get_cookies()
+
+    def allure_take_screenshot(self):
+        allure.attach(self.driver.get_screenshot_as_png(), name="Screenshot", attachment_type=AttachmentType.PNG)
+
