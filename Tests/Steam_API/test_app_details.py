@@ -1,6 +1,6 @@
 import unittest
 from Infra.Api_wrapper import APIWrapper
-from Logic.Steam_API.APP_Details_API import *
+from Logic.Steam_API.APP_Details_API import APP_Details_API
 
 
 class app_details_api_tests(unittest.TestCase):

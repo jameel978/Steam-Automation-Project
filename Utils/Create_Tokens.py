@@ -19,6 +19,4 @@ def main():
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     config = os.path.join(cur_dir, "tokens.json")
     create_tokens_file(my_tokens, config)
-
-if __name__ == "__main__":
-    main()
+    print(f"Token Created successfully, {config}")
