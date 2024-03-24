@@ -32,3 +32,5 @@ class jira_wrapper:
         # Replace the run ID placeholder with the actual run ID
         modified_url = modified_url.replace('RunIdPlaceholder', RUN_ID)
         return modified_url
+
+import platform

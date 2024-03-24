@@ -42,7 +42,8 @@ jobs:
         env:
           COOKIES: ${{ secrets.COOKIES }}
           JIRA_TOKENS: ${{ secrets.JIRA_TOKENS }}
-          RUN_ID: "${{ github.run_id }}_${{ job.container.id }}"
+          RUN_ID: ${{ github.run_id }}"
+          JOB_ID: ${{steps.get-job-id.outputs.job_id }}
           BRANCH_NAME: ${{ github.ref_name}}
         run: python Utils/Create_Tokens.py
 

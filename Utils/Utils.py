@@ -151,4 +151,33 @@ def add_url_to_description(disc,url):
     return lines + disc
 
 
+import platform
+
+
+def save_environment_info(output_file):
+    requirements_file = 'requirements.txt'
+    os_platform = platform.platform()
+    os_release = platform.release()
+    os_version = platform.version()
+    python_version = platform.python_version()
+    java_version = platform.java_ver()
+    javascript_version = platform.node()
+
+    with open(output_file, 'w') as f:
+        f.write(f"OS_Platform={os_platform}\n")
+        f.write(f"OS_Release={os_release}\n")
+        f.write(f"OS_Version={os_version}\n")
+        f.write(f"Python_Version={python_version}\n")
+        f.write(f"Java_Version={java_version}\n")
+        f.write(f"JavaScript_Version={javascript_version}\n\n")
+
+        f.write("Libraries_specified_in_requirements.txt:\n")
+        with open(requirements_file, 'r') as req_file:
+            requirements = req_file.read().splitlines()
+            for requirement in requirements:
+                f.write(f"{requirement}\n")
+
+
+
+output_file = 'environment.properties'
 

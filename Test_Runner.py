@@ -2,7 +2,7 @@ import pytest
 import os
 
 from Infra.Jira_wrapper import jira_wrapper
-from Utils.Utils import read_json, ErrorCapturingPlugin, format_test_name, add_url_to_description
+from Utils.Utils import read_json, ErrorCapturingPlugin, format_test_name, add_url_to_description, save_environment_info
 
 
 def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
@@ -36,6 +36,8 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
 
 
 if __name__ == "__main__":
+
+    print(f"url: {jira_wrapper().get_report_url()}")
     API_Tests = "Tests/Steam_API"
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     test_config = read_json(os.path.join(cur_dir, "Tests/Steam_API/Config/API_Tests_Config.json"))
@@ -48,6 +50,7 @@ if __name__ == "__main__":
     test_type = test_config["test_type"]
     run_tests(UI_Tests, 'Results',"UI",test_type)
 
+    save_environment_info("allure-results/environment.properties")
 
 
 
