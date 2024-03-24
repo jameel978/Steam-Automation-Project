@@ -18,7 +18,7 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
         pytest_args.append("4")
 
     pytest_args.append("-q")
-    pytest_args.append(f"--alluredir=./allure-results/{report_name}")
+    pytest_args.append(f"--alluredir=allure-results")
 
     plugin = ErrorCapturingPlugin()
     pytest.main(pytest_args,plugins=[plugin])
@@ -35,13 +35,13 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
 
 
 if __name__ == "__main__":
-    API_Tests = "/Tests/Steam_API"
+    API_Tests = "Tests/Steam_API"
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     test_config = read_json(os.path.join(cur_dir, "Tests/Steam_API/Config/API_Tests_Config.json"))
     test_type = test_config["test_type"]
     run_tests(API_Tests, 'Results',"API",test_type)
 
-    UI_Tests = "/Tests/Steam_website"
+    UI_Tests = "Tests/Steam_website"
     cur_dir = os.path.dirname(os.path.abspath(__file__))
     test_config = read_json(os.path.join(cur_dir, "Tests/Steam_website/Configs/UI_Tests_Config.json"))
     test_type = test_config["test_type"]
