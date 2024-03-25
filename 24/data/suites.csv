@@ -1,4 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"broken","Sat Mar 23 22:57:50 GMT 2024","Sat Mar 23 22:57:56 GMT 2024","6346","Tests.Steam_website","Steam_cart_test","steam_cart_tests_2_firefox","","","test_add_to_cart",""
-"broken","Sat Mar 23 22:57:50 GMT 2024","Sat Mar 23 22:57:54 GMT 2024","4270","Tests.Steam_website","Steam_cart_test","steam_cart_tests_0_chrome","","","test_add_to_cart",""
-"broken","Sat Mar 23 22:57:50 GMT 2024","Sat Mar 23 22:58:06 GMT 2024","16217","Tests.Steam_website","Steam_cart_test","steam_cart_tests_1_edge","","","test_add_to_cart",""
