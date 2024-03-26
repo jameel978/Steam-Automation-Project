@@ -1,4 +1,5 @@
 import os
+import time
 
 from Logic.Website.Website_Page import Website_page
 from selenium.webdriver.common.keys import Keys
@@ -23,6 +24,7 @@ class Home_page(Website_page):
         self.Find_and_send_input_to_element(self.SEARCH_INPUT, txt)
         if press_return:
             self.Find_and_send_input_to_element(self.SEARCH_INPUT, Keys.RETURN)
+        time.sleep(3) #wait for result to appear
 
     def get_search_results(self):
         try:
