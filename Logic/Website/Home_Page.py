@@ -1,5 +1,4 @@
 import os
-import time
 
 from Logic.Website.Website_Page import Website_page
 from selenium.webdriver.common.keys import Keys
@@ -26,7 +25,6 @@ class Home_page(Website_page):
             self.Find_and_send_input_to_element(self.SEARCH_INPUT, Keys.RETURN)
 
     def get_search_results(self):
-        time.sleep(1)
         try:
             result = self.wait_and_get_element_by_xpath(self.SEARCH_RESULT).text.replace('"',"")
         except:

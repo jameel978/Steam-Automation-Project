@@ -22,7 +22,7 @@ class Cart_page(Website_page):
 
     def get_items_in_carts_names(self):
         names=[]
-        items_elems = self.wait_and_get_elements_by_xpath(self.CART_ITEMS)
+        items_elems = self.wait_and_get_elements_by_xpath(self.CART_ITEMS,sec=5)
         for elem in items_elems:
             names.append(elem.find_element(By.XPATH,self.TITLE).text)
         return names
@@ -31,18 +31,18 @@ class Cart_page(Website_page):
     def remove_all_items_from_cart(self):
         while not self.check_if_cart_is_empty():
             try:
-                elem = self.wait_and_get_element_by_xpath(self.CART_ITEMS)
+                elem = self.wait_and_get_element_by_xpath(self.CART_ITEMS,sec=5)
                 self.remove_item_from_cart(elem)
             except:
                 break
 
     def remove_item_from_cart(self,elem):
-        remove_button = elem.find_element(By.XPATH,self.REMOVE_BUTTON)
+        remove_button = elem.find_element(By.XPATH,self.REMOVE_BUTTON,sec=5)
         remove_button.click()
 
     def check_if_cart_is_empty(self):
         try:
-            self.wait_and_get_element_by_xpath(self.EMPTY_CART,sec=1)
+            self.wait_and_get_element_by_xpath(self.EMPTY_CART,sec=5)
             return True
         except:
             return False
