@@ -94,10 +94,8 @@ def get_browsers():
     cur_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     config_loca = os.path.join(cur_dir, 'Tests/Steam_website/Configs/', "UI_Tests_Config.json")
     browser_names = read_json(config_loca)['browser_config']
-    input_values = [[name] for name in browser_names]
+    input_values = [{'browser':name} for name in browser_names]
     return input_values
-
-
 
 def find_test_methods(folder_path):
     test_cases = []

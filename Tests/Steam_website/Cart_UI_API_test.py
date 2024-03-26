@@ -9,8 +9,7 @@ from parameterized import parameterized_class
 from Utils.Utils import get_browsers, read_json
 
 
-#@parameterized_class(**get_browser())
-@parameterized_class('browser',get_browsers())
+@parameterized_class(get_browsers())
 class steam_cart_tests(unittest.TestCase):
     browser = None
     def __init__(self, methodName='runTest'):

@@ -6,7 +6,7 @@ from Utils.Utils import check_keyword_in_all_sentences, get_browsers, read_json
 from parameterized import parameterized_class
 
 
-@parameterized_class('browser',get_browsers())
+@parameterized_class(get_browsers())
 class HomePage_Search_Tests(unittest.TestCase):
     browser = None
     def __init__(self, methodName='runTest'):
