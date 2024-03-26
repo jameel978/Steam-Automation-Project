@@ -25,7 +25,7 @@ class wishlist_api_tests(unittest.TestCase):
         self.current_page.refresh_page()
 
     def tearDown(self):
-        self.current_page.remove_game_from_wishlist(self.test_params['app_name'])
+        self.current_page.remove_games_from_wish_list()
         self.current_page.quit()
 
     def test_add_game_to_wishlist(self):

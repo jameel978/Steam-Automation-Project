@@ -1,5 +1,4 @@
 import os
-import time
 
 from Logic.Website.Website_Page import Website_page
 from selenium.webdriver.common.by import By
@@ -47,11 +46,3 @@ class Cart_page(Website_page):
             return True
         except:
             return False
-
-    def remove_game_from_cart(self,game_name):
-        items_elems = self.wait_and_get_elements_by_xpath(self.CART_ITEMS)
-        for elem in items_elems:
-            if elem.find_element(By.XPATH, self.TITLE).text == game_name:
-                self.remove_item_from_cart(elem)
-                time.sleep(2) # wait for the game to be removed
-                return

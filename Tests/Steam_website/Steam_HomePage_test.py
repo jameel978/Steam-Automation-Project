@@ -22,7 +22,8 @@ class HomePage_Search_Tests(unittest.TestCase):
 
     def test_search_result(self):
         self.current_page.write_in_search_input(self.test_params['app_name'])
-        self.assertEqual(self.test_params['app_name'], self.current_page.get_search_results(), "Failed Search Test")
+        result = self.current_page.get_search_results()
+        self.assertEqual(self.test_params['app_name'], result, "Failed Search Test")
 
     def test_empty_search(self):
         self.current_page.write_in_search_input("")

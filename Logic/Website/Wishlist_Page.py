@@ -26,20 +26,18 @@ class Wishlist_Page(Website_page):
 
     def get_wishlist_games_names(self):
         names = []
-        items_elems = self.wait_and_get_elements_by_xpath(self.WISHLIST_GAMES,sec=1)
-        for elem in items_elems:
-            names.append(elem.find_element(By.XPATH, self.WISHLIST_GAME_NAME).text)
+        try:
+            items_elems = self.wait_and_get_elements_by_xpath(self.WISHLIST_GAMES,sec=1)
+            for elem in items_elems:
+                names.append(elem.find_element(By.XPATH, self.WISHLIST_GAME_NAME).text)
+        except:
+            pass
         return names
 
-    def remove_game_from_wishlist(self,game_name):
-        items_elems = self.wait_and_get_elements_by_xpath(self.WISHLIST_GAMES,sec=1)
-        for elem in items_elems:
-            if elem.find_element(By.XPATH, self.WISHLIST_GAME_NAME).text == game_name:
-                elem.find_element(By.XPATH, self.REMOVE_GAME_FROM_WISHLIST).click()
-                time.sleep(1) # wait for the game to be removed
-                self.wait_and_get_element_by_xpath(self.CONFIRM_GAME_REMOVE).click()
-                time.sleep(2) # wait for the game to be removed
-                return
-
+    def remove_games_from_wish_list(self):
+        for i in range(self.get_wishlist_games_count()):
+            self.wait_and_get_element_by_xpath(self.REMOVE_GAME_FROM_WISHLIST).click()
+            self.wait_and_get_element_by_xpath(self.CONFIRM_GAME_REMOVE).click()
+            time.sleep(1)
 
 
