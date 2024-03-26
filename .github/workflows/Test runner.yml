@@ -3,7 +3,7 @@ name: Test runner
 on:
   push:
     branches:
-      - Beta
+      - main
 
 
 jobs:
