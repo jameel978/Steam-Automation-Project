@@ -1,4 +1,5 @@
 import os
+import time
 import unittest
 from Infra.Api_wrapper import APIWrapper
 from Infra.Browser_wrapper import BrowserWrapper
@@ -25,11 +26,10 @@ class steam_cart_tests(unittest.TestCase):
         self.cart_api = Cart_API(self.api_wrapper)
 
     def tearDown(self):
-        self.current_page.remove_all_items_from_cart()
+        self.current_page.remove_game_from_cart(self.test_params['app_name'])
         self.current_page.quit()
 
     def test_add_to_cart(self):
-        self.current_page.remove_all_items_from_cart()
         self.cart_api.add_to_cart(self.access_token,self.test_params['app_id'],self.test_params['bundle_id'])
         self.current_page.refresh_page()
         title_result = self.current_page.get_items_in_carts_names()
