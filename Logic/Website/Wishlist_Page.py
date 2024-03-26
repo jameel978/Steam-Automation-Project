@@ -25,9 +25,11 @@ class Wishlist_Page(Website_page):
             return 0
 
     def get_wishlist_games_names(self):
+        #wait for games to appear
+        time.sleep(2)
         names = []
         try:
-            items_elems = self.wait_and_get_elements_by_xpath(self.WISHLIST_GAMES,sec=1)
+            items_elems = self.wait_and_get_elements_by_xpath(self.WISHLIST_GAMES,sec=5)
             for elem in items_elems:
                 names.append(elem.find_element(By.XPATH, self.WISHLIST_GAME_NAME).text)
         except:
@@ -38,6 +40,6 @@ class Wishlist_Page(Website_page):
         for i in range(self.get_wishlist_games_count()):
             self.wait_and_get_element_by_xpath(self.REMOVE_GAME_FROM_WISHLIST).click()
             self.wait_and_get_element_by_xpath(self.CONFIRM_GAME_REMOVE).click()
-            time.sleep(1)
+            time.sleep(2)
 
 
