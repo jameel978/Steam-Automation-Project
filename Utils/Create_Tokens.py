@@ -7,18 +7,6 @@ def create_tokens_file(dictionary, filename='tokens.json'):
     with open(filename, 'w') as file:
         json.dump(dictionary, file)
 
-
-def get_run_id(data):
-    # Check if the data contains 'jobs' key
-    if 'jobs' in data:
-        # Iterate over each job
-        for job in data['jobs']:
-            # Check if 'run_id' is present in the job
-            if 'run_id' in job:
-                return job['run_id']
-    # If run_id is not found, return None
-    return None
-
 def main():
     env_cookies = json.loads(os.environ['COOKIES'])
     jira_tokens = json.loads(os.environ['JIRA_TOKENS'])

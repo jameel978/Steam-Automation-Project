@@ -6,11 +6,10 @@ from Infra.Browser_wrapper import BrowserWrapper
 from Logic.Steam_API.Wishlist_API import Wishlist_API
 from Logic.Website.Wishlist_Page import Wishlist_Page
 from parameterized import parameterized, parameterized_class
-from Utils.Utils import get_browser, read_json
+from Utils.Utils import get_browsers, read_json
 
 
-#@parameterized_class(**get_browser())
-@parameterized_class('browser',[(['chrome']), (['edge']), (['firefox'])])
+@parameterized_class('browser',get_browsers())
 class wishlist_api_tests(unittest.TestCase):
     browser = None
     def __init__(self, methodName='runTest'):

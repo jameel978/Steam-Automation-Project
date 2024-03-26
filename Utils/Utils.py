@@ -90,13 +90,13 @@ def check_keyword_in_all_sentences(sentence_list, keyword):
     return True
 
 
-def get_browser():
+def get_browsers():
     cur_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     config_loca = os.path.join(cur_dir, 'Tests/Steam_website/Configs/', "UI_Tests_Config.json")
     browser_names = read_json(config_loca)['browser_config']
-    input_values = [[[name]] for name in browser_names]
-    _args = {'attrs': "browser", "input_values": input_values}
-    return _args
+    input_values = [[name] for name in browser_names]
+    return input_values
+
 
 
 def find_test_methods(folder_path):

@@ -2,12 +2,11 @@ import os
 import unittest
 from Infra.Browser_wrapper import BrowserWrapper
 from Logic.Website.Home_Page import Home_page
-from Utils.Utils import check_keyword_in_all_sentences, get_browser, read_json
+from Utils.Utils import check_keyword_in_all_sentences, get_browsers, read_json
 from parameterized import parameterized_class
 
 
-#@parameterized_class(**get_browser())
-@parameterized_class('browser',[(['chrome']), (['edge']), (['firefox'])])
+@parameterized_class('browser',get_browsers())
 class HomePage_Search_Tests(unittest.TestCase):
     browser = None
     def __init__(self, methodName='runTest'):

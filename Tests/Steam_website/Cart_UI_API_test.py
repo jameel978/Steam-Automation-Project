@@ -6,11 +6,11 @@ from Logic.Steam_API.Cart_API import Cart_API
 from Logic.Steam_API.Steam_token_API import Steam_Token_API
 from Logic.Website.Cart_page import Cart_page
 from parameterized import parameterized_class
-from Utils.Utils import get_browser, read_json
+from Utils.Utils import get_browsers, read_json
 
 
 #@parameterized_class(**get_browser())
-@parameterized_class('browser',[(['chrome']), (['edge']), (['firefox'])])
+@parameterized_class('browser',get_browsers())
 class steam_cart_tests(unittest.TestCase):
     browser = None
     def __init__(self, methodName='runTest'):
