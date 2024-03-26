@@ -1,0 +1,9 @@
+{
+  "test_type": "serial",
+  "HUB" : "http://localhost:4444/wd/hub",
+  "browser_config": [
+    "chrome",
+    "edge",
+    "firefox"
+    ]
+  }

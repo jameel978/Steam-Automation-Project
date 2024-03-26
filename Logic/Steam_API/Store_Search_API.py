@@ -1,5 +1,8 @@
-from Utils.Utils import *
+
 import os
+
+from Utils.Utils import read_json
+
 
 class Store_Search_API:
 
@@ -31,6 +34,4 @@ class Store_Search_API:
         for app in result:
             ans_.append(str(app['id']))
         return ans_
-
-
 

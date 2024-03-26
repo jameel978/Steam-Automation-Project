@@ -1,0 +1,8 @@
+{
+  "app" : "1245620",
+  "language" : "russian",
+  "min_play_time": 999,
+  "max_play_time": 100,
+  "min_play_time_with_max": 200
+
+}

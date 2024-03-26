@@ -1,25 +1,15 @@
 import time
-
+import allure
+from allure_commons.types import AttachmentType
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from Utils.Utils import *
-import os
-
-
+from selenium.webdriver.common.action_chains import ActionChains
 
 class Driverinstance:
-    def __init__(self,cap):
-        driver = cap[0](**cap[1])
-        self.driver = driver
-        #self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    def __init__(self,driver):
+        self.driver = driver[0](**driver[1])
 
-    def print_html_page(self):
-        # Get the page source (HTML)
-        html = self.driver.page_source
-        # Print the HTML
-        print(html)
-        self.driver.save_screenshot('test.png')
     def get_page_title(self):
         return self.driver.title
 
@@ -67,6 +57,7 @@ class Driverinstance:
         self.driver.execute_script("arguments[0].click();", elem)
 
     def quit(self):
+        self.allure_take_screenshot()
         self.driver.quit()
 
     def go_to_url(self,url):
@@ -74,3 +65,10 @@ class Driverinstance:
 
     def get_cockies(self):
         return self.driver.get_cookies()
+
+    def allure_take_screenshot(self):
+        allure.attach(self.driver.get_screenshot_as_png(), name="Screenshot", attachment_type=AttachmentType.PNG)
+
+    def move_by_offset(self,elem,pix):
+        action = ActionChains(self.driver)
+        action.drag_and_drop_by_offset(elem, pix, 0).perform()
