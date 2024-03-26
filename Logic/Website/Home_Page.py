@@ -24,9 +24,9 @@ class Home_page(Website_page):
         self.Find_and_send_input_to_element(self.SEARCH_INPUT, txt)
         if press_return:
             self.Find_and_send_input_to_element(self.SEARCH_INPUT, Keys.RETURN)
+        time.sleep(3) #wait for result to appear
 
     def get_search_results(self):
-        time.sleep(1)
         try:
             result = self.wait_and_get_element_by_xpath(self.SEARCH_RESULT).text.replace('"',"")
         except:
