@@ -29,9 +29,10 @@ def run_tests(test_cases,output_folder,report_name,test_type = 'serial'):
     jira_instance = jira_wrapper()
     if plugin.errors:
         for test_name, error_message in plugin.errors.items():
-            bug_name = format_test_name(test_name)
-            description = add_url_to_description(error_message,jira_instance.get_report_url())
-            jira_instance.create_issue(bug_name,description)
+            if "AssertionError" in error_message:
+                bug_name = format_test_name(test_name)
+                description = add_url_to_description(error_message,jira_instance.get_report_url())
+                jira_instance.create_issue(bug_name,description)
 
 
 if __name__ == "__main__":
