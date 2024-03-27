@@ -54,7 +54,9 @@ The Steam-Automation-Project is designed to ensure functional consistency and co
     ├── .github
     │   └── workflows
     ├── Docs
-    │   └── STP.docx
+    │   ├──  STD.PDF
+    │   ├──  STP.PDF
+    │   └──  STR.PDF  
     ├── Infra
     │   ├── Api_wrapper.py
     │   ├── Browser_wrapper.py
@@ -263,7 +265,7 @@ The Steam-Automation-Project is designed to ensure functional consistency and co
 ##  Project Roadmap
 
 - [X] `► Add UI & API tests`
-- [ ] `► Add More Documentation (STP,STD,STR)`
+- [X] `► Add More Documentation (STP,STD,STR)`
 - [ ] `► ...`
 
 ---
