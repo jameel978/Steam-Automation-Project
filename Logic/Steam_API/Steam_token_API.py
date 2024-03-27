@@ -5,7 +5,6 @@ from Utils.Utils import read_json
 
 
 class Steam_Token_API:
-
     def __init__(self,my_api):
         self.my_api = my_api
         cur_dir = os.path.dirname(os.path.abspath(__file__))
