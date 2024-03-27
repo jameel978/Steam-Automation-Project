@@ -1,4 +1,5 @@
 import os
+import time
 
 from Logic.Website.Website_Page import Website_page
 from selenium.webdriver.common.by import By
@@ -32,6 +33,7 @@ class Cart_page(Website_page):
         try:
             elem = self.wait_and_get_element_by_xpath(self.REMOVE_ALL_ITEMS,sec=5)
             self.click_on_elem(elem)
+            time.sleep(3) # wait fo items to be removed
         except:
             #no items in cart
             return
