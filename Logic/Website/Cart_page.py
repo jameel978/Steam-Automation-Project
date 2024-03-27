@@ -11,6 +11,7 @@ class Cart_page(Website_page):
 
     CART_ITEMS = "//div//div//div//div//div//div//div[@class='Panel Focusable']"
     REMOVE_BUTTON = "//*[contains(text(),'Remove')]"
+    REMOVE_ALL_ITEMS = "//div[contains(text(),'Remove all items')]"
     TITLE = "//div[@class='pVXX8Pzc4JbT40TP4RwRG']"
     EMPTY_CART = "//div[normalize-space()='Your cart is empty.']"
 
@@ -27,14 +28,13 @@ class Cart_page(Website_page):
             names.append(elem.find_element(By.XPATH,self.TITLE).text)
         return names
 
-
     def remove_all_items_from_cart(self):
-        while not self.check_if_cart_is_empty():
-            try:
-                elem = self.wait_and_get_element_by_xpath(self.CART_ITEMS,sec=5)
-                self.remove_item_from_cart(elem)
-            except:
-                break
+        try:
+            elem = self.wait_and_get_element_by_xpath(self.REMOVE_ALL_ITEMS,sec=5)
+            self.click_on_elem(elem)
+        except:
+            #no items in cart
+            return
 
     def remove_item_from_cart(self,elem):
         remove_button = elem.find_element(By.XPATH,self.REMOVE_BUTTON,sec=5)
