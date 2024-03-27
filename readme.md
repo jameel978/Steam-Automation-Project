@@ -11,8 +11,7 @@
 	<img src="https://img.shields.io/github/license/jameel978/Steam-Automation-Project?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/jameel978/Steam-Automation-Project?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/jameel978/Steam-Automation-Project?style=default&color=0080ff" alt="repo-top-language">
-	<img src="https://img.shields.io/github/languages/count/jameel978/Steam-Automation-Project?style=default&color=0080ff" alt="repo-language-count">
-<p>
+	
 <p align="center">
 	<!-- default option, no dependency badges. -->
 </p>
@@ -316,7 +315,7 @@ Contributions are welcome! Here are several ways you can contribute:
 
 ##  License
 
-This project is licensed under the [MIT License](https://opensource.org/license/mit).
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
