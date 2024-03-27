@@ -24,9 +24,10 @@ class Advanced_search_API:
             return result.json()
 
 
-    def get_app_ids_from_search_results(self,result):
+    def get_app_ids_from_search_results(self,result,test_inly_idx = 6):
         items = result["items"]
         id_list = []
         for app in items:
-            id_list.append(extract_idf_from_link(app['logo']))
-        return id_list
+            if "apps" in app['logo'].split("/"):
+                id_list.append(extract_idf_from_link(app['logo']))
+        return id_list[:test_inly_idx]

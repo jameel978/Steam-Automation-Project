@@ -12,7 +12,6 @@ class APP_Details_API:
         self._config = read_json(os.path.join(cur_dir, "API_Configs", "APP_Details_API.json"))
         self.URL = self._config['url']
 
-
     def get_app_details(self, game_id, **extra):
         url = f"{self.URL}?appids={game_id}"
         if extra:
@@ -37,11 +36,13 @@ class APP_Details_API:
             return result["data"]["price_overview"]["final"]
 
 
+
     def get_app_prices_using_ids_from_app_details(self,id_list_of_search):
         price_list = []
         for id in id_list_of_search:
             price = self.get_app_price_using_id_from_app_details(id)
             price_list.append(price)
         return price_list
+
 
 

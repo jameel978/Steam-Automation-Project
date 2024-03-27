@@ -316,7 +316,7 @@ Contributions are welcome! Here are several ways you can contribute:
 
 ##  License
 
-This project Open Source.
+This project is licensed under the [MIT License](https://opensource.org/license/mit).
 
 ---
 
